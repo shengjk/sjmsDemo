@@ -1,4 +1,7 @@
-package xmht.structureModel.adapter;
+package xmht.structureModel.adapter.objadapter;
+
+import xmht.structureModel.adapter.classadapter.Source;
+import xmht.structureModel.adapter.classadapter.Targetable;
 
 /**
  * Created by shengjk1 on 2016/11/7.

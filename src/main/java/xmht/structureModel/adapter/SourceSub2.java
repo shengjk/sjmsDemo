@@ -1,5 +1,9 @@
 package xmht.structureModel.adapter;
 
+import xmht.structureModel.adapter.objadapter.SourceSub1;
+import xmht.structureModel.adapter.objadapter.Sourceable;
+import xmht.structureModel.adapter.objadapter.Wrapper2;
+
 /**
  * Created by shengjk1 on 2016/11/7.
  */

@@ -1,4 +1,4 @@
-package xmht.structureModel.adapter;
+package xmht.structureModel.adapter.classadapter;
 
 /**
  * Created by shengjk1 on 2016/11/7.
