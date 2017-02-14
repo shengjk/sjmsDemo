@@ -26,7 +26,7 @@ public class SendFactory {
 	/*
 	多个工厂方法模式
 	 */
-	public static class SendFactory {
+	public static class SendFactory1 {
 		public Sender produceMail(){
 			return new MailSender();
 		}
