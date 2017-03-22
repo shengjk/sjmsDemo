@@ -19,8 +19,7 @@ public class SendFactory {
 	public Sender produceSms(){
 		return new SmsSender();
 	}
-<<<<<<< HEAD
-=======
+
 	
 	/**
 	 * Created by shengjk1 on 2017/1/6.
@@ -38,5 +37,5 @@ public class SendFactory {
 			return new SmsSender();
 		}
 	}
->>>>>>> origin/master
+
 }

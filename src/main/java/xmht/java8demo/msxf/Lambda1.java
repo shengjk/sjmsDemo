@@ -12,7 +12,7 @@ public class Lambda1 {
 	public static void main(String[] args) {
 		Runnable a=()-> System.out.println("aaa");
 		BinaryOperator<Long> add=(x,y)->x+y;//add 代表两个数字相加的那行代码
-		Comparator<String> comp=(first,second)->Integer.compare(first.length(),second.length())
+		Comparator<String> comp=(first,second)->Integer.compare(first.length(),second.length());
 		Predicate<Integer> integerPredicate=x->x>5;
 	}
 }

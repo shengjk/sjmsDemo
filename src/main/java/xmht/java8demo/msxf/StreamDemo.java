@@ -1,4 +1,5 @@
-package msxf;
+package xmht.java8demo.msxf;
+
 
 import org.junit.Assert;
 
