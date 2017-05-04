@@ -1,4 +1,4 @@
-package xmht.algorithm.sortalgorithm;
+package xmht.algorithm;
 
 /*
 快速排序

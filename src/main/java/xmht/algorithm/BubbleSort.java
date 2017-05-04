@@ -1,4 +1,4 @@
-package xmht.algorithm.sortalgorithm;
+package xmht.algorithm;
 
 /**
  * Created by shengjk1 on 2017/2/14.
