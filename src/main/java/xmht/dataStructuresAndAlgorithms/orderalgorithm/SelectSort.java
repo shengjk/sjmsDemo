@@ -11,7 +11,7 @@ package xmht.dataStructuresAndAlgorithms.orderalgorithm;
  * compare O(n^2) exchange O(n)
  * 当n较少时，特别是如果交换时间级比比较的时间级大得多时，选择排序别冒泡是快的
  */
-
+//只找最矮的，跟最左边未排序的进行交换
 public class SelectSort {
 	public static void main(String[] args) {
 		int[] a={0,21,2,3,45,-10};

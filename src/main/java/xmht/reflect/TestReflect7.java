@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 public class TestReflect7{
 	private String proprety = null;
     public static void main(String[] args) throws Exception {
-        Class<?> clazz = Class.forName("reflect.TestReflect7");
+        Class<?> clazz = Class.forName("xmht.reflect.TestReflect7");
         Object obj = clazz.newInstance();
         // 可以直接对 private 的属性赋值
         Field field = clazz.getDeclaredField("proprety");

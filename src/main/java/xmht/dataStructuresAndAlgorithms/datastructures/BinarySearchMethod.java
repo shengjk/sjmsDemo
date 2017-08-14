@@ -39,6 +39,24 @@ class OrdArray{
 		}
 	}
 	
+	//递归
+	private int recFind(long searchkey,int lowerBound,int upperBound){
+		int curIn;
+		curIn=(lowerBound+upperBound)/2;
+		if (a[curIn]==searchkey){
+			return curIn;
+		}else if(lowerBound>upperBound){
+			return nElems;
+		}else {
+			if (a[curIn]<searchkey){
+				return recFind(searchkey,curIn+1,upperBound);
+			}else {
+				return recFind(searchkey,lowerBound,curIn-1);
+			}
+		}
+	}
+	
+	
 	public void insert(long value){
 		int j;
 		for (j=0;j<nElems;j++){
