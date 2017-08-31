@@ -1,8 +1,9 @@
-package xmht.algorithm;
+package xmht.dataStructuresAndAlgorithms.orderalgorithm;
 
 /*
 快速排序
-基本思想：选择一个基准元素,通常选择第一个元素或者最后一个元素,通过一趟扫描，将待排序列分成两部分,一部分比基准元素小,一部分大于等于基准元素,此时基准元素在其排好序后的正确位置,然后再用同样的方法递归地排序划分的两部分。
+基本思想：选择一个基准元素,通常选择第一个元素或者最后一个元素,通过一趟扫描，将待排序列分成两部分,
+一部分比基准元素小,一部分大于等于基准元素,此时基准元素在其排好序后的正确位置,然后再用同样的方法递归地排序划分的两部分。
 快排不稳定，平均时间复杂度为O(nlgn)
  */
 public class QuickSort {
@@ -17,7 +18,6 @@ public class QuickSort {
 		int tmp = list[low];    //数组的第一个作为中轴
 		while (low < high) {
 			while (low < high && list[high] >= tmp) {
-				
 				high--;
 			}
 			list[low] = list[high];   //比中轴小的记录移到低端

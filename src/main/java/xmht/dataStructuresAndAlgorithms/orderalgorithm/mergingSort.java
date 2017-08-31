@@ -1,4 +1,4 @@
-package xmht.algorithm;
+package xmht.dataStructuresAndAlgorithms.orderalgorithm;
 
 import java.util.Arrays;
 
