@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 
 /**
  * Created by shengjk1 on 2017/8/8
+ * 不会自动回收
  */
 public class TestUnsafeMemo {
 	
@@ -25,7 +26,7 @@ public class TestUnsafeMemo {
 			long point=unsafe.allocateMemory(20*1024*1024);
 			System.out.println(unsafe.getByte(point+1));
 			
-			unsafe.freeMemory(point);
+//			unsafe.freeMemory(point);
 		}
 	}
 }
