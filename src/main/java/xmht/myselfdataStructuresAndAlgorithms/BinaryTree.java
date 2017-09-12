@@ -20,8 +20,13 @@ class Node{
 	public Node leftChild;
 	public Node rightChild;
 	
-	public void displayNode(){
-		System.out.printf("%d,%d",iData,dData);
+	public void displayNode()      // display ourself
+	{
+		System.out.print('{');
+		System.out.print(iData);
+		System.out.print(", ");
+		System.out.print(dData);
+		System.out.print("} ");
 	}
 }
 
@@ -202,13 +207,46 @@ class Tree{
 		}
 		/*
 		删除有两个子节点的
+		删除两个节点时，要用它的中序后继来代替该节点
+		首先，程序找到初始节点的右子节点，它的关键字值一定比初始的节点大，
+		然后转到初始节点的右子节点的左子节点那里(如果有的话)，然后到这个左子节点的左子节点
+		依次类推，顺着左子节点的路径一直找下去，这个路径上最后一个左子节点就是初始节点的后继
+		
 		 */
-	
+		else{
+			Node sucessor=getSuccessor(current);
+			if (current==root){
+				root=sucessor;
+			}else if (isLeftChild){
+				parent.leftChild=sucessor;
+			}else {
+				parent.rightChild=sucessor;
+			}
+			sucessor.leftChild=current.rightChild;
+		}
 		return  true;
 	}
 	
 	
-	
+	/*
+	找后继节点
+	 */
+	private Node getSuccessor(Node delNode){
+		Node sucessorParent=delNode;
+		Node successor=delNode;
+		Node current=delNode.rightChild;
+		while (current!=null){
+			sucessorParent=successor;
+			successor=current;
+			current=current.leftChild;
+		}
+		
+		if (successor!=delNode.rightChild){
+			sucessorParent.leftChild=successor.rightChild;
+			successor.rightChild=delNode.rightChild;
+		}
+		return successor;
+	}
 	
 	/**
 	 * 遍历树
@@ -379,16 +417,16 @@ class TreeApp
 						System.out.print("Could not find ");
 					System.out.print(value + '\n');
 					break;
-//				case 'd':
-//					System.out.print("Enter value to delete: ");
-//					value = getInt();
-//					boolean didDelete = theTree.delete(value);
-//					if(didDelete)
-//						System.out.print("Deleted " + value + '\n');
-//					else
-//						System.out.print("Could not delete ");
-//					System.out.print(value + '\n');
-//					break;
+				case 'd':
+					System.out.print("Enter value to delete: ");
+					value = getInt();
+					boolean didDelete = theTree.delete(value);
+					if(didDelete)
+						System.out.print("Deleted " + value + '\n');
+					else
+						System.out.print("Could not delete ");
+					System.out.print(value + '\n');
+					break;
 				case 't':
 					System.out.print("Enter type 1, 2 or 3: ");
 					value = getInt();
