@@ -78,6 +78,11 @@ public class RBTree<T extends Comparable<T>> {
     }
     /**
      * remove the node by give value,if this value not exists in tree return null
+     *删除修复分为四种情况(删除黑节点后)
+     *1.待删除的节点的兄弟节点是红色节点
+     * 2.待删除节点的兄弟节点是黑色节点，且兄弟节点的子节点都是黑色的
+     * 3.待调整的节点的兄弟节点是黑色的节点，且兄弟节点的左子节点是红色的，右节点是黑色的(兄弟节点在右边)，如果兄弟节点在左边的话，就是兄弟节点的右子节点是红色的，左节点是黑色的。
+        4.待调整的节点的兄弟节点是黑色的节点，且右子节点是是红色的(兄弟节点在右边)，如果兄弟节点在左边，则就是对应的就是左节点是红色的。
      * @param value include search key
      * @return the value contain in the removed node
      */
@@ -262,9 +267,17 @@ public class RBTree<T extends Comparable<T>> {
         //node.setRight(null);
         return node;
     }
-
-
-
+    
+    
+    /**
+     * 插入节点是红色的
+     * 插入修复分三种情况，而且新插入节点的父节点都是红色的
+     * 1.叔叔节点也是红色的
+     * 2.叔叔节点为空，且祖父节点、父节点和新节点处于一条斜线上
+     * 3.叔叔节点为空，且祖父节点、父节点和新节点不处在同一条斜线上
+     * @param node
+     * @return
+     */
     private T addNode(RBTreeNode<T> node){
         node.setLeft(null);
         node.setRight(null);

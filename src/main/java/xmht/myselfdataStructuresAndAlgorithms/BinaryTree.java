@@ -13,6 +13,9 @@ O(logN)
 二叉搜索树  左子节点要比父节点小
 如果关键字随机插入，树会或多或少的平衡一点，如果插入是顺序的，则会很不平衡
 
+
+二叉树的效率分析：
+
  */
 class Node{
 	public  int iData; //data item(key)
@@ -46,6 +49,11 @@ class Tree{
 		}
 	}
 	
+	/**
+	 * 对于有重复的关键字要特别注意，本方法只查找第一个
+	 * @param key
+	 * @return
+	 */
 	public Node find(int key){
 		Node current=root;
 		
@@ -105,31 +113,6 @@ class Tree{
 	}
 	
 	
-	public Node getMinNode(){
-		if (isEmpty()){
-			return null;
-		}
-		Node current,last=null;
-		current=root;
-		while (current!=null){
-			last=current;
-			current=current.leftChild;
-		}
-		return last;
-	}
-	
-	public Node getMaxNode(){
-		if (isEmpty()){
-			return null;
-		}
-		Node current,last=null;
-		current=root;
-		while (current!=null){
-			last=current;
-			current=current.rightChild;
-		}
-		return last;
-	}
 	
 	
 	/**
@@ -247,6 +230,36 @@ class Tree{
 		}
 		return successor;
 	}
+	
+	
+	
+	public Node getMinNode(){
+		if (isEmpty()){
+			return null;
+		}
+		Node current,last=null;
+		current=root;
+		while (current!=null){
+			last=current;
+			current=current.leftChild;
+		}
+		return last;
+	}
+	
+	public Node getMaxNode(){
+		if (isEmpty()){
+			return null;
+		}
+		Node current,last=null;
+		current=root;
+		while (current!=null){
+			last=current;
+			current=current.rightChild;
+		}
+		return last;
+	}
+	
+	
 	
 	/**
 	 * 遍历树
