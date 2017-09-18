@@ -6,7 +6,10 @@ import java.io.InputStreamReader;
 
 /**
  * Created by shengjk1 on 2017/9/10.
+ *
+ * O(1)
  */
+
 class DataItem{
 	private  int iData;
 	
