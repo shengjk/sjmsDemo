@@ -28,6 +28,7 @@ public class EnumClass {
 	}
 }
 
+//枚举类不一般情况下应该是不提供set方法的
 enum CompanyEnum {
 	SF("顺丰速运", 1001), YTO("圆通速递", 1002), STO("申通物流", 1003), YD("韵达快运", 1004), YZPY("中国邮政", 1005);
 	private String company;
@@ -57,6 +58,8 @@ enum CompanyEnum {
 	public static void main(String[] args) {
 		System.out.println(CompanyEnum.SF.getCode());
 		System.out.println(CompanyEnum.SF.getCompany());
+		CompanyEnum.SF.setCode(111111);
+		System.out.println(CompanyEnum.SF.getCode());
 	}
 }
 
