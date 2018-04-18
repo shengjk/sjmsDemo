@@ -7,6 +7,16 @@ import java.lang.reflect.Proxy;
 /**
  * Created by shengjk1 on 2018/4/13
  */
+
+/*
+java动态代理可以避免静态代理带来的代码冗余的问题
+java 的动态代理只能针对接口创建代理，不能针对类创建代理
+
+用途：
+Spring AOP就是使用的动态代理方式。在Hibernate和Spring这两种框架里，在AOP，权限控制，事务管理等方面都有动态代理的实现
+dubbo消费者初始化的时候生成代理，也是使用的动态代理。
+hibernate的懒加载。
+ */
 public class DynamicProxyHandler implements InvocationHandler{
 	private Object proxied;
 	
@@ -14,17 +24,29 @@ public class DynamicProxyHandler implements InvocationHandler{
 		this.proxied = proxied;
 	}
 	
+	public <T> T getProxy(){
+		return (T) Proxy.newProxyInstance(
+				proxied.getClass().getClassLoader(),
+				proxied.getClass().getInterfaces(),
+				this);
+	}
+	
+	
 	@Override
 	/*
-	proxy实际对象的代理，method代理执行器当前所执行的方法，args当前所执行的方法传递的参数
+	proxy真实对象，method我们调用真实对象的方法，args要调用真实对象方法时接受的参数
 	 */
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		System.out.println(" proxy: "+proxy.getClass() +", method: "+method+",args: "+args);
+		System.out.println("========= "+proxy.getClass().getInterfaces());
 		if (args!=null){
 			for (Object arg:args) {
 				System.out.println(" "+arg);
 			}
 		}
+		/*
+		执行被代理的操作，然后使用Method.invoke()将请求转发给代理对象，并传入必须参数
+		 */
 		return method.invoke(proxied,args);
 	}
 }
@@ -46,6 +68,7 @@ class SimpleDynamicProxy{
 				new Class[]{Interface.class},//该代理实现的接口列表
 				new DynamicProxyHandler(realObject));//InvocationHandler接口的一个实现
 		consumer(proxy);
+//		Interface proxy = new DynamicProxyHandler(realObject).getProxy();
 //		proxy.somethingElse("bonobo");
 //		proxy.doSomething();
 	}

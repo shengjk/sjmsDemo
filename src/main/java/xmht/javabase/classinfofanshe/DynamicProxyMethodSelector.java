@@ -7,14 +7,17 @@ import java.lang.reflect.Proxy;
 /**
  * Created by shengjk1 on 2018/4/16
  */
-interface SomeMethods{
+interface SomeMethods {
 	void boring1();
+	
 	void boring2();
+	
 	void insteresting(String arg);
+	
 	void boring3();
 }
 
-class Implementation implements SomeMethods{
+class Implementation implements SomeMethods {
 	@Override
 	public void boring1() {
 		System.out.println("boring1");
@@ -27,7 +30,7 @@ class Implementation implements SomeMethods{
 	
 	@Override
 	public void insteresting(String arg) {
-		System.out.println("interesting"+arg);
+		System.out.println("interesting" + arg);
 	}
 	
 	@Override
@@ -36,30 +39,29 @@ class Implementation implements SomeMethods{
 	}
 }
 
-public class MethodSelector implements InvocationHandler{
+public class DynamicProxyMethodSelector implements InvocationHandler {
 	private Object proxied;
 	
-	public MethodSelector(Object proxied) {
+	public DynamicProxyMethodSelector(Object proxied) {
 		this.proxied = proxied;
 	}
 	
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		if (method.getName().equalsIgnoreCase("insteresting")){
+		if (method.getName().equalsIgnoreCase("insteresting")) {
 			System.out.println("Proxy detected the interesting method");
 		}
-		return method.invoke(proxied,args);
+		return method.invoke(proxied, args);
 	}
 }
 
 
-class SelectingMethods{
+class SelectingMethods {
 	public static void main(String[] args) {
 		
-		
-		SomeMethods proxy = (SomeMethods)Proxy.newProxyInstance(SomeMethods.class.getClassLoader(),
+		SomeMethods proxy = (SomeMethods) Proxy.newProxyInstance(SomeMethods.class.getClassLoader(),
 				new Class[]{SomeMethods.class},
-				new MethodSelector(new Implementation()));
+				new DynamicProxyMethodSelector(new Implementation()));
 		
 		proxy.boring1();
 		proxy.insteresting("a");
