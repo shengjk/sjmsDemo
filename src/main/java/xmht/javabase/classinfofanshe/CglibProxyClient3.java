@@ -7,6 +7,22 @@ import java.lang.reflect.Method;
 /**
  * Created by shengjk1 on 2018/4/18
  */
+//实际对象
+class TableDAO3 {
+	public void create(){
+		System.out.println("create() is running !");
+	}
+	public void query(){
+		System.out.println("query() is running !");
+	}
+	public void update(){
+		System.out.println("update() is running !");
+	}
+	public void delete(){
+		System.out.println("delete() is running !");
+	}
+}
+
 
 class AuthProxy3 implements MethodInterceptor {
 	private String name ;
@@ -26,37 +42,12 @@ class AuthProxy3 implements MethodInterceptor {
 	}
 }
 
-class TableDAOFactory3 {
-	private static TableDAO tDao = new TableDAO();
-	public static TableDAO getInstance(){
-		return tDao;
-	}
-	
-	public static TableDAO getAuthInstance(AuthProxy3 authProxy){
-		Enhancer en = new Enhancer();
-		//进行代理
-		en.setSuperclass(TableDAO.class);
-		en.setCallback(authProxy);
-		//生成代理实例
-		return (TableDAO)en.create();
-	}
-	
-	
-	public static TableDAO getAuthInstanceByFilter(AuthProxy3 authProxy){
-		Enhancer en = new Enhancer();
-		en.setSuperclass(TableDAO.class);
-		en.setCallbacks(new Callback[]{authProxy, NoOp.INSTANCE});
-		en.setCallbackFilter(new AuthProxyFilter());
-		return (TableDAO)en.create();
-	}
-	
-}
-
-
 class AuthProxyFilter implements CallbackFilter {
+	@Override
+	//0或者1是取en.setCallbacks中的new Callback[]{}的值
 	public int accept(Method arg0) {
 		if(!"query".equalsIgnoreCase(arg0.getName())){
-			System.out.println("=============== "+arg0.getName());
+//			System.out.println("=============== "+arg0.getName());
 			return 0;
 		}
 		return 1;
@@ -65,15 +56,41 @@ class AuthProxyFilter implements CallbackFilter {
 }
 
 
+class TableDAOFactory3 {
+	private static TableDAO3 tDao = new TableDAO3();
+	public static TableDAO3 getInstance(){
+		return tDao;
+	}
+	
+	public static TableDAO3 getAuthInstance(AuthProxy3 authProxy){
+		Enhancer en = new Enhancer();
+		//进行代理
+		en.setSuperclass(TableDAO3.class);
+		en.setCallback(authProxy);
+		//生成代理实例
+		return (TableDAO3)en.create();
+	}
+	
+	
+	public static TableDAO3 getAuthInstanceByFilter(AuthProxy3 authProxy){
+		Enhancer en = new Enhancer();
+		en.setSuperclass(TableDAO3.class);
+		en.setCallbacks(new Callback[]{authProxy, NoOp.INSTANCE});
+		en.setCallbackFilter(new AuthProxyFilter());
+		return (TableDAO3)en.create();
+	}
+	
+}
+
 
 public class CglibProxyClient3 {
 	public static void main(String[] args) {
-		TableDAO tableDao = TableDAOFactory2.getInstance();
+		TableDAO3 tableDao = TableDAOFactory3.getInstance();
 //		doMethod(tableDao);
 		haveAuth();
 		haveNoAuth();
 	}
-	public static void doMethod(TableDAO dao){
+	public static void doMethod(TableDAO3 dao){
 		dao.create();
 		dao.query();
 		dao.update();
@@ -82,11 +99,11 @@ public class CglibProxyClient3 {
 	
 	
 	public static void haveAuth(){
-		TableDAO tDao = TableDAOFactory3.getAuthInstanceByFilter(new AuthProxy3("张三"));
+		TableDAO3 tDao = TableDAOFactory3.getAuthInstanceByFilter(new AuthProxy3("张三"));
 		doMethod(tDao);
 	}
 	public static void haveNoAuth(){
-		TableDAO tDao = TableDAOFactory3.getAuthInstanceByFilter(new AuthProxy3("李四"));
+		TableDAO3 tDao = TableDAOFactory3.getAuthInstanceByFilter(new AuthProxy3("李四"));
 		doMethod(tDao);
 	}
 	

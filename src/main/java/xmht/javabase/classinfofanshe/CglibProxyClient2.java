@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
  * Created by shengjk1 on 2018/4/18
  */
 
+//权限验证的方法拦截器
 class AuthProxy2 implements MethodInterceptor {
 	private String name ;
 	//传入用户名称
