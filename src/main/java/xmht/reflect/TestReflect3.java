@@ -8,7 +8,7 @@ import java.lang.reflect.Modifier;
 public class TestReflect3 implements Serializable {
 	private static final long serialVersionUID = -2862585049955236662L;
     public static void main(String[] args) throws Exception {
-        Class<?> clazz = Class.forName("reflect.TestReflect3");
+        Class<?> clazz = Class.forName("xmht.reflect.TestReflect3");
         Method method[] = clazz.getMethods();
         for (int i = 0; i < method.length; ++i) {
             Class<?> returnType = method[i].getReturnType();

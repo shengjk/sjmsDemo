@@ -2,7 +2,10 @@ package xmht.javabase.enumdemo;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.EnumSet;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static xmht.javabase.enumdemo.AlarmPoints.OFFICE2;
 import static xmht.javabase.enumdemo.AlarmPoints.OFFICE3;
@@ -27,6 +30,93 @@ public class EnumClass {
 		}
 	}
 }
+
+
+/*
+javap -p  OzWitch.class
+Compiled from "EnumClass.java"
+final class xmht.javabase.enumdemo.OzWitch extends java.lang.Enum<xmht.javabase.enumdemo.OzWitch> {
+  public static final xmht.javabase.enumdemo.OzWitch WEST;
+  public static final xmht.javabase.enumdemo.OzWitch NORTH;
+  public static final xmht.javabase.enumdemo.OzWitch EAST;
+  public static final xmht.javabase.enumdemo.OzWitch SOUTH;
+  private java.lang.String description;
+  private static final xmht.javabase.enumdemo.OzWitch[] ENUM$VALUES;
+  static {};
+  private xmht.javabase.enumdemo.OzWitch(java.lang.String, int, java.lang.String);
+  public java.lang.String getDescription();
+  public static void main(java.lang.String[]);
+  public static xmht.javabase.enumdemo.OzWitch[] values();
+  public static xmht.javabase.enumdemo.OzWitch valueOf(java.lang.String);
+}
+
+ */
+enum OzWitch {
+	WEST("west"),
+	NORTH("north"),
+	EAST("east"),
+	SOUTH("south");
+	
+	private String description;
+	
+	private OzWitch(String description) {
+		this.description = description;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public static void main(String[] args) {
+		for (OzWitch witch : OzWitch.values()) {
+			System.out.println(witch.getDescription());
+		}
+	}
+}
+
+
+enum SpaceShip {
+	SCOUT, CARGO, TRANSPORT, CRUISER, BATTLESHIP, MOTHERSHIP;
+	
+	@Override
+	public String toString() {
+		String id = name();
+		String lower = id.substring(1).toLowerCase();
+		return id.charAt(0) + lower;
+	}
+	
+	public static void main(String[] args) {
+		for (SpaceShip s : SpaceShip.values()) {
+			System.out.println(s);
+//			System.out.println(s.getDeclaringClass().getEnumConstants()[0]);
+			
+		}
+	}
+}
+
+
+enum Signal {
+	GREEN, YELLOW, RED;
+}
+
+class TraffcLight {
+	Signal color = Signal.RED;
+	
+	public void change() {
+		switch (color) {
+			case RED:
+				color = Signal.GREEN;
+				break;
+			case GREEN:
+				color = Signal.YELLOW;
+				break;
+			case YELLOW:
+				color = Signal.RED;
+		}
+	}
+	
+}
+
 
 //枚举类不一般情况下应该是不提供set方法的
 enum CompanyEnum {
@@ -63,6 +153,7 @@ enum CompanyEnum {
 	}
 }
 
+
 enum GenderEnum {
 	MAN(0),
 	WOMEN(1),
@@ -72,24 +163,12 @@ enum GenderEnum {
 	GenderEnum(int code) {
 		this.code = code;
 	}
-}
-
-enum SpaceSHip {
-	SCOUT, CARGO, TRANSPORT, CRUISER, BATTLESHIP, MOTHERSHIP;
-	
-	@Override
-	public String toString() {
-		String id = name();
-		System.out.println(ordinal());
-		return id;
-	}
 	
 	public static void main(String[] args) {
-		for (SpaceSHip s : values()) {
-			System.out.println(s);
-		}
+		System.out.println(GenderEnum.MAN.code);
 	}
 }
+
 
 enum Explore {HERE, THERE}
 
@@ -116,6 +195,7 @@ class Reflection {
 	}
 }
 
+
 enum CartoonCharacter implements Gengrator<CartoonCharacter> {
 	SLEEP, SPANKY, PUNCHY, SILLY, BOUNCY;
 	private Random random = new Random(47);
@@ -123,10 +203,16 @@ enum CartoonCharacter implements Gengrator<CartoonCharacter> {
 	public CartoonCharacter next() {
 		return values()[random.nextInt(values().length)];
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(CartoonCharacter.BOUNCY.next());
+	}
 }
 
 
 /**
+ * 使用接口来组织枚举类。这种需求有时源自我们希望扩展原enum中的元素，有时是因为我们希望使用子类将一个enum中的元素进行分组
+ *
  * 对于enum而言，实现接口是使其子类化的唯一办法
  */
 interface Food {
@@ -146,26 +232,47 @@ interface Food {
 		BLACK_COFFEE, DECAF_COFFEE;
 	}
 }
-class TypeOfFood{
+
+class TypeOfFood {
 	public static void main(String[] args) {
-		Food food=Food.Appetizer.SALAD;
-		food= Food.MainCourse.BURRITO;
+		Food food = Food.Appetizer.SALAD;
+		food = Food.MainCourse.BURRITO;
 	}
 }
 
-enum AlarmPoints{
-	STAIR1,STAIR2,LOBBY,OFFICE1,OFFICE2,OFFICE3,OFFICE5,OFFICE4,
+
+
+enum Course{
+	APPETIZER(Food.Appetizer.class);
+	
+	private Food[] values;
+	private Course(Class<? extends Food> kind){
+		values=kind.getEnumConstants();
+	}
 }
-class EnumSets{
+
+
+
+
+
+
+
+
+
+enum AlarmPoints {
+	STAIR1, STAIR2, LOBBY, OFFICE1, OFFICE2, OFFICE3, OFFICE5, OFFICE4,
+}
+
+class EnumSets {
 	public static void main(String[] args) {
-		EnumSet<AlarmPoints> enumSet=EnumSet.noneOf(AlarmPoints.class);
+		EnumSet<AlarmPoints> enumSet = EnumSet.noneOf(AlarmPoints.class);
 		enumSet.add(AlarmPoints.STAIR1);
 		System.out.println(enumSet);
-		enumSet.addAll(EnumSet.of(AlarmPoints.STAIR1,AlarmPoints.STAIR2));
+		enumSet.addAll(EnumSet.of(AlarmPoints.STAIR1, AlarmPoints.STAIR2));
 		System.out.println(enumSet);
-		enumSet=EnumSet.allOf(AlarmPoints.class);
+		enumSet = EnumSet.allOf(AlarmPoints.class);
 		System.out.println(enumSet);
-		enumSet.removeAll(EnumSet.range(OFFICE2,OFFICE3));
+		enumSet.removeAll(EnumSet.range(OFFICE2, OFFICE3));
 		System.out.println(enumSet);
 	}
 }
