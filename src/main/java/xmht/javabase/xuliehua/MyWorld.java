@@ -12,8 +12,26 @@ class House implements Serializable {
 }
 
 class Animal implements Serializable {
+	public static int id=1111;
 	private String name;
 	private House preferredHouse;
+	
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public House getPreferredHouse() {
+		return preferredHouse;
+	}
+	
+	public void setPreferredHouse(House preferredHouse) {
+		this.preferredHouse = preferredHouse;
+	}
 	
 	public Animal(String name, House preferredHouse) {
 		this.name = name;
@@ -48,15 +66,19 @@ public class MyWorld {
 		o2.writeObject(animals);
 		o2.close();
 		
+		
+		
+		
 		ObjectInputStream in1 = new ObjectInputStream(new ByteArrayInputStream(bufl.toByteArray()));
 		ObjectInputStream in2 = new ObjectInputStream(new ByteArrayInputStream(buf2.toByteArray()));
-	
-		List animals1=(List)in1.readObject();
-		List animals2=(List)in1.readObject();
-		List animals3=(List)in2.readObject();
-		List animals4=(List)in2.readObject();
 		
-		System.out.println("animals1= "+animals1);
+		List<Animal> animals1=(List)in1.readObject();
+		List<Animal> animals2=(List)in1.readObject();
+		List<Animal> animals3=(List)in2.readObject();
+		List<Animal> animals4=(List)in2.readObject();
+		
+		Animal animal = animals1.get(0);
+		System.out.println("animals1= "+Animal.id);
 		System.out.println("animals2= "+animals2);
 		System.out.println("animals3= "+animals3);
 		System.out.println("animals4= "+animals4);

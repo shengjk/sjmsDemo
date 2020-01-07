@@ -12,9 +12,6 @@ class Customer{
 	public String toString() {
 		return "Customer "+id;
 	}
-	public static Test<Customer> genertor(){
-		return null;
-	}
 }
 
 public class BankTeller {

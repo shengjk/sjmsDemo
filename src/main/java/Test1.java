@@ -13,7 +13,6 @@ public class Test1 {
 		int b=1>>1;
 		System.out.println(b);
 		
-		
 		float fa=9.0F;
 		int i1=(int) fa;
 		System.out.println(i1);

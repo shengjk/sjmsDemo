@@ -19,3 +19,16 @@ public enum CacheSingleton {
 		return a;
 	}
 }
+
+
+/*
+public class SingletonObjectMap {
+	private static class SingletonFactory{
+		private static ObjectMapper objectMapper=new ObjectMapper();
+	}
+	
+	public static  ObjectMapper getObjectMapper(){
+		return SingletonFactory.objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+	}
+}
+ */
