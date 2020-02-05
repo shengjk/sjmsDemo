@@ -1,4 +1,4 @@
-package xmht.datastructuresandalgorithms.datastructure;
+package xmht.datastructuresandalgorithms.datastructure.LinkedList;
 
 /**
  * @author shengjk1
@@ -17,12 +17,12 @@ public class DoublyLinked {
 		this.previous = null;
 	}
 	
-	public boolean isEmpty(){
+	public boolean isEmpty() {
 		return true;
 	}
 }
 
-class DoublyLink{
+class DoublyLink {
 	public long dData;
 	public Link next;
 	public Link previous;
@@ -31,7 +31,7 @@ class DoublyLink{
 		this.dData = dData;
 	}
 	
-	public void dispalyLink(){
-		System.out.println(dData+"");
+	public void dispalyLink() {
+		System.out.println(dData + "");
 	}
 }

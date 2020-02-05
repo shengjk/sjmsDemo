@@ -1,4 +1,4 @@
-package xmht.datastructuresandalgorithms.datastructure;
+package xmht.datastructuresandalgorithms.datastructure.LinkedList;
 
 /**
  * @author shengjk1
@@ -17,7 +17,7 @@ public class FirstLastList {
 /**
  * 基本的数据结构还是不变
  */
-class LinkFirstLast{
+class LinkFirstLast {
 	public long dData;
 	public Link next;
 	
@@ -26,7 +26,7 @@ class LinkFirstLast{
 		this.dData = dData;
 	}
 	
-	public void dispalyLink(){
-		System.out.println(dData+"");
+	public void dispalyLink() {
+		System.out.println(dData + "");
 	}
 }

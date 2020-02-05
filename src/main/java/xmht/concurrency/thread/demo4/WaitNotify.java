@@ -25,15 +25,6 @@ public class WaitNotify {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
-
-//		synchronized (lock){
-//			try {
-//				TimeUnit.SECONDS.sleep(1000);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		}
 		
 		Thread notifyThread = new Thread(new Notify(), "notifyThread");
 		notifyThread.start();

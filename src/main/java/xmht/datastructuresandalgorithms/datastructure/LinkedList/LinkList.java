@@ -1,4 +1,4 @@
-package xmht.datastructuresandalgorithms.datastructure;
+package xmht.datastructuresandalgorithms.datastructure.LinkedList;
 
 /**
  * @author shengjk1
@@ -28,7 +28,7 @@ public class LinkList {
 			return;
 		}
 		currentNode = last;
-		previousNode=last;
+		previousNode = last;
 		
 		while (currentNode.getNext() != null) {
 			if (currentNode.getiData() >= link.getiData()) {
@@ -36,8 +36,8 @@ public class LinkList {
 				previousNode.setNext(link);
 				return;
 			}
-			previousNode=currentNode;
-			currentNode=currentNode.getNext();
+			previousNode = currentNode;
+			currentNode = currentNode.getNext();
 		}
 		if (currentNode.getiData() >= link.getiData()) {
 			link.setNext(currentNode);
@@ -82,7 +82,7 @@ public class LinkList {
 			temp = current;
 			current = next;
 		}
-		last=temp;
+		last = temp;
 		return temp;
 	}
 	
