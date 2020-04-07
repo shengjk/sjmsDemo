@@ -12,6 +12,8 @@ public class SelectSort {
 		if (arr == null || arr.length < 2) {
 			return;
 		}
+		//选择一个最小的然后进行交换，因为 冒泡排序 要交换很多次，
+		//而选择排序对冒泡排序进行了一定的优化，减少了交换次数
 		for (int i = 0; i < arr.length - 1; i++) {
 			int minIndex = i;
 			for (int j = i + 1; j < arr.length; j++) {

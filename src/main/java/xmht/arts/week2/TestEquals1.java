@@ -2,7 +2,6 @@ package xmht.arts.week2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * @author shengjk1
@@ -19,6 +18,11 @@ public class TestEquals1 {
 		ArrayList<Student> students = new ArrayList<>();
 		students.add(student);
 		System.out.println("list " + students.contains(student1));
+		
+		CaseInsensitiveString polish = new CaseInsensitiveString("Polish");
+		String s = "polish";
+		System.out.println(polish.equals(s));
+		System.out.println(s.equals(polish));
 	}
 }
 
@@ -34,9 +38,12 @@ class CaseInsensitiveString {
 	
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		CaseInsensitiveString that = (CaseInsensitiveString) o;
-		return Objects.equals(s, that.s);
+		if (o instanceof CaseInsensitiveString) {
+			return s.equalsIgnoreCase(((CaseInsensitiveString) o).s);
+		}
+		if (o instanceof String) {
+			return s.equalsIgnoreCase((String) o);
+		}
+		return false;
 	}
 }
