@@ -129,7 +129,6 @@ public class Calcaulator1 {
 				numStack.push(res);
 			}
 			System.out.printf("表达式 %s = %d ", expression, numStack.pop());
-			
 		}
 		
 	}

@@ -9,7 +9,11 @@ import java.util.Arrays;
 public class ShellSort {
 	public static void main(String[] args) {
 		int[] arr = {8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
-		shellSort(arr);
+		shellSort1(arr);
+		
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
 	}
 	
 	public static void shellSort(int[] arr) {
@@ -26,6 +30,21 @@ public class ShellSort {
 				}
 			}
 			System.out.println("第 " + (count++) + "轮 " + Arrays.toString(arr));
+		}
+	}
+	
+	public static void shellSort1(int[] arr) {
+		for (int gap = arr.length / 2; gap > 0; gap /= 2) {
+			for (int i = gap; i < arr.length; i++) {
+				int j = i;
+				int temp = arr[j];
+				
+				while (j - gap >= 0 && temp < arr[j - gap]) {
+					arr[j] = arr[j - gap];
+					j -= gap;
+				}
+				arr[j] = temp;
+			}
 		}
 	}
 }
