@@ -1,4 +1,4 @@
-package xmht.datastructuresandalgorithms.algorithms;
+package xmht.datastructuresandalgorithms.algorithms.sort;
 
 import java.util.Arrays;
 

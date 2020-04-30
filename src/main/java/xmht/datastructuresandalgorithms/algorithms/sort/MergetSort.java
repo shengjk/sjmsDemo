@@ -1,4 +1,4 @@
-package xmht.datastructuresandalgorithms.algorithms;
+package xmht.datastructuresandalgorithms.algorithms.sort;
 
 import java.util.Arrays;
 
@@ -18,6 +18,7 @@ public class MergetSort {
 	
 	public static void mergeSort(int[] arr, int left, int right, int[] temp) {
 		if (left < right) {
+			System.out.println("mergerSort left:" + left + " right:" + right);
 			int mid = (left + right) / 2;
 			//向左递归
 			mergeSort(arr, left, mid, temp);
@@ -36,7 +37,7 @@ public class MergetSort {
 	 * @param temp  临时数组
 	 */
 	public static void merge(int[] arr, int left, int mid, int right, int[] temp) {
-		System.out.println("left:" + left + " right:" + right);
+		System.out.println("merge    left:" + arr[left] + " right:" + arr[right]);
 		//左边有序序列的初始索引
 		int i = left;
 		//右边有序序列的初始索引
