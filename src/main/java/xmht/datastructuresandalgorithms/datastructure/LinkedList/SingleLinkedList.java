@@ -7,7 +7,7 @@ import java.util.Objects;
  * @date 2020/1/5
  */
 public class SingleLinkedList {
-	private HeroNode headNode;
+	private final HeroNode headNode;
 	
 	public SingleLinkedList() {
 		this.headNode = new HeroNode();
@@ -16,201 +16,6 @@ public class SingleLinkedList {
 	public SingleLinkedList(HeroNode headNode) {
 		this.headNode = headNode;
 	}
-	
-	//在最后添加
-	public void addHero(HeroNode node) {
-		HeroNode tmp = headNode;
-		while (tmp.getNext() != null) {
-			tmp = tmp.getNext();
-		}
-		tmp.setNext(node);
-	}
-	
-	
-	public void addHeroByOrder1(HeroNode node) {
-		HeroNode tmp = headNode;
-		HeroNode tmpPro = headNode;
-		if (tmp.getNext() == null) {
-			tmp.setNext(node);
-		}
-		while (tmp.getNext() != null) {
-			tmpPro = tmp;
-			//其实一个变量就可以了，tmp 和 tmp.next
-			tmp = tmp.getNext();
-			if (tmpPro.getNo() < node.getNo() && tmp.getNo() > node.getNo()) {
-				node.setNext(tmp);
-				tmpPro.setNext(node);
-				break;
-			} else if (tmpPro.getNo() == node.getNo()) {
-				System.out.println("存在相同编号的 hero");
-				return;
-			}
-		}
-		if (tmp.getNext() == null) {
-			if (tmp.getNo() < node.getNo()) {
-				tmp.setNext(node);
-			}
-		} else {
-		
-		}
-	}
-	
-	//=====
-	public void addHeroByOrder(HeroNode node) {
-		HeroNode tmp = headNode;
-		while (true) {
-			if (tmp.getNext() == null) {
-				break;
-			}
-			if (tmp.getNext().getNo() > node.getNo()) {
-				break;
-			}
-			tmp = tmp.getNext();
-		}
-		
-		if (tmp.getNext() == null) {
-			tmp.setNext(node);
-		} else {
-			node.setNext(tmp.getNext());
-			tmp.setNext(node);
-		}
-	}
-	
-	
-	public void addFirstHero(HeroNode heroNode) {
-		if (headNode.getNext() == null) {
-			headNode.setNext(heroNode);
-		} else {
-			HeroNode tmp = headNode.getNext();
-			heroNode.setNext(tmp);
-			headNode.setNext(heroNode);
-		}
-	}
-	
-	//在最后删除
-	public void deleteHero() {
-		HeroNode tmp = headNode;
-		HeroNode tmpPro = headNode;
-		while (tmp.getNext() != null) {
-			tmpPro = tmp;
-			tmp = tmp.getNext();
-		}
-		tmpPro.setNext(null);
-	}
-	
-	
-	public void deleteHero(HeroNode heroNode) {
-		HeroNode tmp = headNode;
-		boolean tag = false;
-		while (true) {
-			if (tmp.getNext() == null) {
-				break;
-			}
-			if (tmp.getNext().getNo() == heroNode.getNo()) {
-				tag = true;
-				break;
-			}
-			tmp = tmp.getNext();
-		}
-		if (tag) {
-			tmp.setNext(tmp.getNext().getNext());
-		} else {
-			System.out.println("为找到该 node 节点 " + heroNode.getNo());
-		}
-	}
-	
-	//查找某位英雄
-	public boolean findHero(HeroNode node) {
-		HeroNode tmp = headNode;
-		while (tmp.getNext() != null) {
-			tmp = tmp.getNext();
-			if (tmp.equals(node)) {
-				System.out.println("find hero " + node);
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	
-	public HeroNode getHeadNode() {
-		return this.headNode;
-	}
-	
-	//reverse list
-	public void reverseList(HeroNode headNode) {
-		HeroNode cur = headNode.getNext();
-		HeroNode next = null;
-		HeroNode tmpHeadNode = new HeroNode();
-		
-		while (cur != null) {
-			next = cur.getNext();
-			cur.setNext(tmpHeadNode.getNext());
-			tmpHeadNode.setNext(cur);
-			cur = next;
-		}
-		this.headNode.setNext(tmpHeadNode.getNext());
-	}
-	
-	
-	//合并两个有序的链表最后形成一个有序的链表
-	public HeroNode mergeList(HeroNode headNode1, HeroNode headNode2) {
-		HeroNode tmpHeroNode = new HeroNode();
-		HeroNode tmp1 = headNode1.getNext();
-		HeroNode tmp2 = headNode2.getNext();
-		while (true) {
-			if (tmp1 == null) {
-				while (tmp2.getNext() != null) {
-					tmp1 = tmp2.getNext();
-					tmp2.setNext(tmpHeroNode.getNext());
-					tmpHeroNode.setNext(tmp2);
-					tmp2 = tmp1.getNext();
-				}
-				return tmpHeroNode;
-			}
-			if (tmp2 == null) {
-				while (tmp1.getNext() != null) {
-					tmp2 = tmp1.getNext();
-					tmp1.setNext(tmpHeroNode.getNext());
-					tmpHeroNode.setNext(tmp1);
-					tmp1 = tmp2.getNext();
-				}
-				return tmpHeroNode;
-			}
-			
-			if (tmp1.getNext().getNo() >= tmp2.getNext().getNo()) {
-				tmp1.setNext(tmpHeroNode.getNext());
-				tmpHeroNode.setNext(tmp1);
-				tmp1 = tmp1.getNext();
-			} else {
-				tmp2.setNext(tmpHeroNode.getNext());
-				tmpHeroNode.setNext(tmp2);
-				tmp2 = tmp2.getNext();
-			}
-		}
-	}
-	
-	
-	public HeroNode mergeList1(HeroNode headNode1, HeroNode headNode2) {
-		SingleLinkedList singleLinkedList = new SingleLinkedList(headNode2);
-		HeroNode tmp = headNode1;
-		while (tmp.getNext() != null) {
-			tmp = tmp.getNext();
-			singleLinkedList.addHeroByOrder(new HeroNode(tmp));
-			System.out.println(tmp.getName());
-		}
-		return headNode2;
-	}
-	
-	
-	public void display() {
-		HeroNode tmp = headNode;
-		while (tmp.getNext() != null) {
-			tmp = tmp.getNext();
-			System.out.println(tmp.getName());
-		}
-	}
-	
 	
 	public static void main(String[] args) {
 		SingleLinkedList singleLinkedList = new SingleLinkedList();
@@ -287,6 +92,193 @@ public class SingleLinkedList {
 //		singleLinkedList.display();
 //
 //		System.out.println(singleLinkedList.findHero(heroNode));
+	}
+	
+	//在最后添加
+	public void addHero(HeroNode node) {
+		HeroNode tmp = headNode;
+		while (tmp.getNext() != null) {
+			tmp = tmp.getNext();
+		}
+		tmp.setNext(node);
+	}
+	
+	public void addHeroByOrder1(HeroNode node) {
+		HeroNode tmp = headNode;
+		HeroNode tmpPro = headNode;
+		if (tmp.getNext() == null) {
+			tmp.setNext(node);
+		}
+		while (tmp.getNext() != null) {
+			tmpPro = tmp;
+			//其实一个变量就可以了，tmp 和 tmp.next
+			tmp = tmp.getNext();
+			if (tmpPro.getNo() < node.getNo() && tmp.getNo() > node.getNo()) {
+				node.setNext(tmp);
+				tmpPro.setNext(node);
+				break;
+			} else if (tmpPro.getNo() == node.getNo()) {
+				System.out.println("存在相同编号的 hero");
+				return;
+			}
+		}
+		if (tmp.getNext() == null) {
+			if (tmp.getNo() < node.getNo()) {
+				tmp.setNext(node);
+			}
+		} else {
+		
+		}
+	}
+	
+	//=====
+	public void addHeroByOrder(HeroNode node) {
+		HeroNode tmp = headNode;
+		while (true) {
+			if (tmp.getNext() == null) {
+				break;
+			}
+			if (tmp.getNext().getNo() > node.getNo()) {
+				break;
+			}
+			tmp = tmp.getNext();
+		}
+		
+		if (tmp.getNext() == null) {
+			tmp.setNext(node);
+		} else {
+			node.setNext(tmp.getNext());
+			tmp.setNext(node);
+		}
+	}
+	
+	public void addFirstHero(HeroNode heroNode) {
+		if (headNode.getNext() == null) {
+			headNode.setNext(heroNode);
+		} else {
+			HeroNode tmp = headNode.getNext();
+			heroNode.setNext(tmp);
+			headNode.setNext(heroNode);
+		}
+	}
+	
+	//在最后删除
+	public void deleteHero() {
+		HeroNode tmp = headNode;
+		HeroNode tmpPro = headNode;
+		while (tmp.getNext() != null) {
+			tmpPro = tmp;
+			tmp = tmp.getNext();
+		}
+		tmpPro.setNext(null);
+	}
+	
+	public void deleteHero(HeroNode heroNode) {
+		HeroNode tmp = headNode;
+		boolean tag = false;
+		while (true) {
+			if (tmp.getNext() == null) {
+				break;
+			}
+			if (tmp.getNext().getNo() == heroNode.getNo()) {
+				tag = true;
+				break;
+			}
+			tmp = tmp.getNext();
+		}
+		if (tag) {
+			tmp.setNext(tmp.getNext().getNext());
+		} else {
+			System.out.println("为找到该 node 节点 " + heroNode.getNo());
+		}
+	}
+	
+	//查找某位英雄
+	public boolean findHero(HeroNode node) {
+		HeroNode tmp = headNode;
+		while (tmp.getNext() != null) {
+			tmp = tmp.getNext();
+			if (tmp.equals(node)) {
+				System.out.println("find hero " + node);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public HeroNode getHeadNode() {
+		return this.headNode;
+	}
+	
+	//reverse list
+	public void reverseList(HeroNode headNode) {
+		HeroNode cur = headNode.getNext();
+		HeroNode next = null;
+		HeroNode tmpHeadNode = new HeroNode();
+		
+		while (cur != null) {
+			next = cur.getNext();
+			cur.setNext(tmpHeadNode.getNext());
+			tmpHeadNode.setNext(cur);
+			cur = next;
+		}
+		this.headNode.setNext(tmpHeadNode.getNext());
+	}
+	
+	//合并两个有序的链表最后形成一个有序的链表
+	public HeroNode mergeList(HeroNode headNode1, HeroNode headNode2) {
+		HeroNode tmpHeroNode = new HeroNode();
+		HeroNode tmp1 = headNode1.getNext();
+		HeroNode tmp2 = headNode2.getNext();
+		while (true) {
+			if (tmp1 == null) {
+				while (tmp2.getNext() != null) {
+					tmp1 = tmp2.getNext();
+					tmp2.setNext(tmpHeroNode.getNext());
+					tmpHeroNode.setNext(tmp2);
+					tmp2 = tmp1.getNext();
+				}
+				return tmpHeroNode;
+			}
+			if (tmp2 == null) {
+				while (tmp1.getNext() != null) {
+					tmp2 = tmp1.getNext();
+					tmp1.setNext(tmpHeroNode.getNext());
+					tmpHeroNode.setNext(tmp1);
+					tmp1 = tmp2.getNext();
+				}
+				return tmpHeroNode;
+			}
+			
+			if (tmp1.getNext().getNo() >= tmp2.getNext().getNo()) {
+				tmp1.setNext(tmpHeroNode.getNext());
+				tmpHeroNode.setNext(tmp1);
+				tmp1 = tmp1.getNext();
+			} else {
+				tmp2.setNext(tmpHeroNode.getNext());
+				tmpHeroNode.setNext(tmp2);
+				tmp2 = tmp2.getNext();
+			}
+		}
+	}
+	
+	public HeroNode mergeList1(HeroNode headNode1, HeroNode headNode2) {
+		SingleLinkedList singleLinkedList = new SingleLinkedList(headNode2);
+		HeroNode tmp = headNode1;
+		while (tmp.getNext() != null) {
+			tmp = tmp.getNext();
+			singleLinkedList.addHeroByOrder(new HeroNode(tmp));
+			System.out.println(tmp.getName());
+		}
+		return headNode2;
+	}
+	
+	public void display() {
+		HeroNode tmp = headNode;
+		while (tmp.getNext() != null) {
+			tmp = tmp.getNext();
+			System.out.println(tmp.getName());
+		}
 	}
 }
 

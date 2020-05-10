@@ -9,14 +9,10 @@ import java.util.List;
  * Created by shengjk1 on 2018/4/23
  */
 public class ArrayMaker<T> {
-	private Class<T> kind;
+	private final Class<T> kind;
 	
 	public ArrayMaker(Class<T> kind) {
 		this.kind = kind;
-	}
-	
-	T[] create (int size){
-		return (T[]) Array.newInstance(kind,size);
 	}
 	
 	public static void main(String[] args) {
@@ -24,16 +20,20 @@ public class ArrayMaker<T> {
 		String[] strings = stringMaker.create(9);
 		System.out.println(Arrays.toString(strings));
 	}
+	
+	T[] create(int size) {
+		return (T[]) Array.newInstance(kind, size);
+	}
 }
 
-class ListMaker<T>{
-	List<T> create(){
-		return new ArrayList<>();
+class ListMaker<T> {
+	public static void main(String[] args) {
+		ListMaker<String> listMaker = new ListMaker<String>();
+		List<String> strings = listMaker.create();
 	}
 	
-	public static void main(String[] args) {
-		ListMaker<String> listMaker=new ListMaker<String>();
-		List<String> strings=listMaker.create();
+	List<T> create() {
+		return new ArrayList<>();
 	}
 }
 

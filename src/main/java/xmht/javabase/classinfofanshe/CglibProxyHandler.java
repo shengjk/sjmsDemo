@@ -44,22 +44,33 @@ cglib代理无需实现接口，通过生成类字节码实现代理，比反射
  */
 
 //目标对象
-class UserDao{
-	public void save(){
+class UserDao {
+	public void save() {
 		System.out.println("保存数据");
 	}
 }
 
 //代理对象
-public class CglibProxyHandler implements MethodInterceptor{
-	private Object target;//维护一个目标对象
+public class CglibProxyHandler implements MethodInterceptor {
+	private final Object target;//维护一个目标对象
 	
 	public CglibProxyHandler(Object target) {
 		this.target = target;
 	}
 	
+	public static void main(String[] args) {
+		//目标对象
+		UserDao target = new UserDao();
+		System.out.println(target.getClass());
+		//代理对象
+		UserDao proxy = (UserDao) new CglibProxyHandler(target).getProxyInstance();
+		System.out.println(proxy.getClass());
+		//执行代理对象方法
+		proxy.save();
+	}
+	
 	//为目标对象生成代理对象
-	public Object getProxyInstance(){
+	public Object getProxyInstance() {
 		//工具类
 		Enhancer enhancer = new Enhancer();
 		//设置父类
@@ -77,17 +88,5 @@ public class CglibProxyHandler implements MethodInterceptor{
 		Object returnValve = method.invoke(target, args);
 		System.out.println("关闭事务");
 		return null;
-	}
-	
-	
-	public static void main(String[] args) {
-		//目标对象
-		UserDao target = new UserDao();
-		System.out.println(target.getClass());
-		//代理对象
-		UserDao proxy = (UserDao) new CglibProxyHandler(target).getProxyInstance();
-		System.out.println(proxy.getClass());
-		//执行代理对象方法
-		proxy.save();
 	}
 }

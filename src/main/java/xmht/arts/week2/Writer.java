@@ -5,5 +5,5 @@ package xmht.arts.week2;
  * @date 2020/3/11
  */
 public interface Writer {
-	public void write();
+	void write();
 }

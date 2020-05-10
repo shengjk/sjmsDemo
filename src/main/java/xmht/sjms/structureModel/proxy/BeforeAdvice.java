@@ -1,11 +1,11 @@
-
 package xmht.sjms.structureModel.proxy;
+
 /**
  * 前置增强
- * @author Liuhaihua
  *
+ * @author Liuhaihua
  */
 public interface BeforeAdvice {
- public void before();
+	void before();
 }
 

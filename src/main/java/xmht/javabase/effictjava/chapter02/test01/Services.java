@@ -8,11 +8,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2019-05-13
  */
 public class Services {
-	private Services() {
-	};
-	
-	private static final Map<String, Provider> providers = new ConcurrentHashMap<>();
 	public static final String DEFAULT_PROVIDER_NAME = "<def>";
+	private static final Map<String, Provider> providers = new ConcurrentHashMap<>();
+	private Services() {
+	}
 	
 	public static void registerDefaultProvider(Provider provider) {
 		registerProvider(DEFAULT_PROVIDER_NAME, provider);

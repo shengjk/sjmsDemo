@@ -17,8 +17,8 @@ O(logN)
 二叉树的效率分析：
 
  */
-class Node{
-	public  int iData; //data item(key)
+class Node {
+	public int iData; //data item(key)
 	public double dData; //data item
 	public Node leftChild;
 	public Node rightChild;
@@ -33,42 +33,39 @@ class Node{
 	}
 }
 
-class Tree{
+class Tree {
 	private Node root;
 	
 	public Tree() {
-		root=null;
+		root = null;
 	}
 	
 	
-	public boolean isEmpty(){
-		if (root==null){
-			return true;
-		}else {
-			return false;
-		}
+	public boolean isEmpty() {
+		return root == null;
 	}
 	
 	/**
 	 * 对于有重复的关键字要特别注意，本方法只查找第一个
+	 *
 	 * @param key
 	 * @return
 	 */
-	public Node find(int key){
-		Node current=root;
+	public Node find(int key) {
+		Node current = root;
 		
-		if (isEmpty()){
+		if (isEmpty()) {
 			return null;
 		}
 		
 		//传过来的东西永远在前边
-		while (current.iData!=key){
-			if (key<current.iData){
-				current=current.leftChild;
-			}else{
-				current=current.rightChild;
+		while (current.iData != key) {
+			if (key < current.iData) {
+				current = current.leftChild;
+			} else {
+				current = current.rightChild;
 			}
-			if (current==null){
+			if (current == null) {
 				return null;
 			}
 		}
@@ -78,41 +75,40 @@ class Tree{
 	/**
 	 * current在查找的過程中会变为null，才能发现它查过的上一个节点没有一个对应的子节点。如果不存储parent，就会失去插入新节点的位置
 	 * 到最后只有一个root节点
+	 *
 	 * @param id
 	 * @param dd
 	 */
-	public void insert(int id,double dd){
-		Node newNode=new Node();
-		newNode.iData=id;
-		newNode.dData=dd;
+	public void insert(int id, double dd) {
+		Node newNode = new Node();
+		newNode.iData = id;
+		newNode.dData = dd;
 		
-		if (isEmpty()){
-			root=newNode;
-		}else {
-			Node current=root;
-			Node parent=null;
+		if (isEmpty()) {
+			root = newNode;
+		} else {
+			Node current = root;
+			Node parent = null;
 			
-			while (true){
-				parent=current;
+			while (true) {
+				parent = current;
 				
-				if (id<current.iData){
-					current=current.leftChild;
-					if (null==current){
-						parent.leftChild=newNode;
+				if (id < current.iData) {
+					current = current.leftChild;
+					if (null == current) {
+						parent.leftChild = newNode;
 						return;
 					}
-				}else {
-					current=current.rightChild;
-					if (null==current){
-						parent.rightChild=newNode;
+				} else {
+					current = current.rightChild;
+					if (null == current) {
+						parent.rightChild = newNode;
 						return;
 					}
 				}
 			}
 		}
 	}
-	
-	
 	
 	
 	/**
@@ -123,30 +119,28 @@ class Tree{
 	 * 3.该节点有两个子节点
 	 */
 	/**
-	 *
 	 * @param key
 	 * @return
 	 */
-	public boolean delete(int key){
+	public boolean delete(int key) {
 		
 		
+		Node current = root;
+		Node parent = root;
+		boolean isLeftChild = true;
 		
-		Node current=root;
-		Node parent=root;
-		boolean isLeftChild=true;
-		
-		while (current.iData!=key){
-			parent=current;
+		while (current.iData != key) {
+			parent = current;
 			
-			if (key<current.iData){
-				isLeftChild=true;  //初始值跟赋值永远是区分开的，即使初始值跟要赋旳值一致
-				current=current.leftChild;
-			}else {
-				isLeftChild=false;
-				current=current.rightChild;
+			if (key < current.iData) {
+				isLeftChild = true;  //初始值跟赋值永远是区分开的，即使初始值跟要赋旳值一致
+				current = current.leftChild;
+			} else {
+				isLeftChild = false;
+				current = current.rightChild;
 			}
 			
-			if (current==null){
+			if (current == null) {
 				return false;
 			}
 		}
@@ -160,32 +154,32 @@ class Tree{
 		/*
 		 *删除没有子节点的
 		 */
-		if (null==current.rightChild && null==current.leftChild){
-			if (current==root){
-				root=null;
-			}else if (isLeftChild){
-				parent.leftChild=null;
-			}else {
-				parent.rightChild=null;
+		if (null == current.rightChild && null == current.leftChild) {
+			if (current == root) {
+				root = null;
+			} else if (isLeftChild) {
+				parent.leftChild = null;
+			} else {
+				parent.rightChild = null;
 			}
 		/*
 		删除有一个子节点的
 		 */
-		}else if (current.rightChild==null){
-			if (current==root){
-				root=current.leftChild;
-			}else if (isLeftChild){
-				parent.leftChild=current.leftChild;
-			}else {
-				parent.rightChild=current.leftChild;
+		} else if (current.rightChild == null) {
+			if (current == root) {
+				root = current.leftChild;
+			} else if (isLeftChild) {
+				parent.leftChild = current.leftChild;
+			} else {
+				parent.rightChild = current.leftChild;
 			}
-		}else if (current.leftChild==null){
-			if (current==root){
-				root=current.rightChild;
-			}else if (isLeftChild){
-				parent.leftChild=current.rightChild;
-			}else {
-				parent.rightChild=current.rightChild;
+		} else if (current.leftChild == null) {
+			if (current == root) {
+				root = current.rightChild;
+			} else if (isLeftChild) {
+				parent.leftChild = current.rightChild;
+			} else {
+				parent.rightChild = current.rightChild;
 			}
 		}
 		/*
@@ -196,69 +190,67 @@ class Tree{
 		依次类推，顺着左子节点的路径一直找下去，这个路径上最后一个左子节点就是初始节点的后继
 		
 		 */
-		else{
-			Node sucessor=getSuccessor(current);
-			if (current==root){
-				root=sucessor;
-			}else if (isLeftChild){
-				parent.leftChild=sucessor;
-			}else {
-				parent.rightChild=sucessor;
+		else {
+			Node sucessor = getSuccessor(current);
+			if (current == root) {
+				root = sucessor;
+			} else if (isLeftChild) {
+				parent.leftChild = sucessor;
+			} else {
+				parent.rightChild = sucessor;
 			}
-			sucessor.leftChild=current.rightChild;
+			sucessor.leftChild = current.rightChild;
 		}
-		return  true;
+		return true;
 	}
 	
 	
 	/*
 	找后继节点
 	 */
-	private Node getSuccessor(Node delNode){
-		Node sucessorParent=delNode;
-		Node successor=delNode;
-		Node current=delNode.rightChild;
-		while (current!=null){
-			sucessorParent=successor;
-			successor=current;
-			current=current.leftChild;
+	private Node getSuccessor(Node delNode) {
+		Node sucessorParent = delNode;
+		Node successor = delNode;
+		Node current = delNode.rightChild;
+		while (current != null) {
+			sucessorParent = successor;
+			successor = current;
+			current = current.leftChild;
 		}
 		
-		if (successor!=delNode.rightChild){
-			sucessorParent.leftChild=successor.rightChild;
-			successor.rightChild=delNode.rightChild;
+		if (successor != delNode.rightChild) {
+			sucessorParent.leftChild = successor.rightChild;
+			successor.rightChild = delNode.rightChild;
 		}
 		return successor;
 	}
 	
 	
-	
-	public Node getMinNode(){
-		if (isEmpty()){
+	public Node getMinNode() {
+		if (isEmpty()) {
 			return null;
 		}
-		Node current,last=null;
-		current=root;
-		while (current!=null){
-			last=current;
-			current=current.leftChild;
+		Node current, last = null;
+		current = root;
+		while (current != null) {
+			last = current;
+			current = current.leftChild;
 		}
 		return last;
 	}
 	
-	public Node getMaxNode(){
-		if (isEmpty()){
+	public Node getMaxNode() {
+		if (isEmpty()) {
 			return null;
 		}
-		Node current,last=null;
-		current=root;
-		while (current!=null){
-			last=current;
-			current=current.rightChild;
+		Node current, last = null;
+		current = root;
+		while (current != null) {
+			last = current;
+			current = current.rightChild;
 		}
 		return last;
 	}
-	
 	
 	
 	/**
@@ -267,48 +259,50 @@ class Tree{
 	 * 快。
 	 * 二叉搜索树最长用的遍历方法是中序遍历
 	 */
-	public void traverse(int traverseType)
-	{
-		switch(traverseType)
-		{
-			case 1: System.out.print("\nPreorder traversal: ");
+	public void traverse(int traverseType) {
+		switch (traverseType) {
+			case 1:
+				System.out.print("\nPreorder traversal: ");
 				preOrder(root);
 				break;
-			case 2: System.out.print("\nInorder traversal:  ");
+			case 2:
+				System.out.print("\nInorder traversal:  ");
 				inOrder(root);
 				break;
-			case 3: System.out.print("\nPostorder traversal: ");
+			case 3:
+				System.out.print("\nPostorder traversal: ");
 				postOrder(root);
 				break;
 		}
 		System.out.println();
 	}
 	// -------------------------------------------------------------
+	
 	/**
 	 * 前序遍历
 	 * 1.访问节点
 	 * 2.调用自身遍历该节点的左子树
 	 * 3.调用自身遍历该接单的右子树
+	 *
 	 * @param localRoot
 	 */
-	private void preOrder(Node localRoot)
-	{
-		if(localRoot != null)
-		{
+	private void preOrder(Node localRoot) {
+		if (localRoot != null) {
 			System.out.print(localRoot.iData + " ");
 			preOrder(localRoot.leftChild);
 			preOrder(localRoot.rightChild);
 		}
 	}
 	// -------------------------------------------------------------
+	
 	/**
 	 * 中序遍历
 	 * 1.调用自身来遍历左子树
 	 * 2.访问这个节点
 	 * 3.调用自身来遍历右子树
 	 */
-	private void  inOrder(Node localRoot){
-		if (localRoot!=null){
+	private void inOrder(Node localRoot) {
+		if (localRoot != null) {
 			inOrder(localRoot.leftChild);
 			System.out.println(localRoot.iData);
 			inOrder(localRoot.rightChild);
@@ -317,75 +311,68 @@ class Tree{
 	// -------------------------------------------------------------
 	
 	/**
-	 *后序遍历
+	 * 后序遍历
 	 * 1.调用自身遍历节点的左子树
 	 * 2.调用自身遍历节点的右子树
 	 * 3.访问该节点
+	 *
 	 * @param localRoot
 	 */
-	private void postOrder(Node localRoot)
-	{
-		if(localRoot != null)
-		{
+	private void postOrder(Node localRoot) {
+		if (localRoot != null) {
 			postOrder(localRoot.leftChild);
 			postOrder(localRoot.rightChild);
 			System.out.print(localRoot.iData + " ");
 		}
 	}
+	
 	// -------------------------------------------------------------
-	public void displayTree()
-	{
+	public void displayTree() {
 		Stack globalStack = new Stack();
 		globalStack.push(root);
 		int nBlanks = 32;
 		boolean isRowEmpty = false;
 		System.out.println(
 				"......................................................");
-		while(isRowEmpty==false)
-		{
+		while (isRowEmpty == false) {
 			Stack localStack = new Stack();
 			isRowEmpty = true;
 			
-			for(int j=0; j<nBlanks; j++)
+			for (int j = 0; j < nBlanks; j++)
 				System.out.print(' ');
 			
-			while(globalStack.isEmpty()==false)
-			{
-				Node temp = (Node)globalStack.pop();
-				if(temp != null)
-				{
+			while (globalStack.isEmpty() == false) {
+				Node temp = (Node) globalStack.pop();
+				if (temp != null) {
 					System.out.print(temp.iData);
 					localStack.push(temp.leftChild);
 					localStack.push(temp.rightChild);
 					
-					if(temp.leftChild != null ||
+					if (temp.leftChild != null ||
 							temp.rightChild != null)
 						isRowEmpty = false;
-				}
-				else
-				{
+				} else {
 					System.out.print("--");
 					localStack.push(null);
 					localStack.push(null);
 				}
-				for(int j=0; j<nBlanks*2-2; j++)
+				for (int j = 0; j < nBlanks * 2 - 2; j++)
 					System.out.print(' ');
 			}  // end while globalStack not empty
 			System.out.println();
 			nBlanks /= 2;
-			while(localStack.isEmpty()==false)
-				globalStack.push( localStack.pop() );
+			while (localStack.isEmpty() == false)
+				globalStack.push(localStack.pop());
 		}  // end while isRowEmpty is false
 		System.out.println(
 				"......................................................");
 	}  // end displayTree()
 // -------------------------------------------------------------
 }  // end class Tree
+
 ////////////////////////////////////////////////////////////////
-class TreeApp
-{
-	public static void main(String[] args) throws IOException
-	{
+class TreeApp {
+	public static void main(String[] args) throws IOException {
 		int value;
 		Tree theTree = new Tree();
 		
@@ -401,13 +388,11 @@ class TreeApp
 		theTree.insert(93, 1.5);
 		theTree.insert(97, 1.5);
 		
-		while(true)
-		{
+		while (true) {
 			System.out.print("Enter first letter of show, ");
 			System.out.print("insert, find, delete, or traverse: ");
 			int choice = getChar();
-			switch(choice)
-			{
+			switch (choice) {
 				case 's':
 					theTree.displayTree();
 					break;
@@ -420,13 +405,11 @@ class TreeApp
 					System.out.print("Enter value to find: ");
 					value = getInt();
 					Node found = theTree.find(value);
-					if(found != null)
-					{
+					if (found != null) {
 						System.out.print("Found: ");
 						found.displayNode();
 						System.out.print("\n");
-					}
-					else
+					} else
 						System.out.print("Could not find ");
 					System.out.print(value + '\n');
 					break;
@@ -434,7 +417,7 @@ class TreeApp
 					System.out.print("Enter value to delete: ");
 					value = getInt();
 					boolean didDelete = theTree.delete(value);
-					if(didDelete)
+					if (didDelete)
 						System.out.print("Deleted " + value + '\n');
 					else
 						System.out.print("Could not delete ");
@@ -450,23 +433,23 @@ class TreeApp
 			}  // end switch
 		}  // end while
 	}  // end main()
+	
 	// -------------------------------------------------------------
-	public static String getString() throws IOException
-	{
+	public static String getString() throws IOException {
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 		String s = br.readLine();
 		return s;
 	}
+	
 	// -------------------------------------------------------------
-	public static char getChar() throws IOException
-	{
+	public static char getChar() throws IOException {
 		String s = getString();
 		return s.charAt(0);
 	}
+	
 	//-------------------------------------------------------------
-	public static int getInt() throws IOException
-	{
+	public static int getInt() throws IOException {
 		String s = getString();
 		return Integer.parseInt(s);
 	}

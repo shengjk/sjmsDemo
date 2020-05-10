@@ -6,9 +6,9 @@ import java.util.List;
 /**
  * Created by shengjk1 on 2018/4/13
  */
-class CountedInteger{
+class CountedInteger {
 	private static long counter;
-	private final long id=counter++;
+	private final long id = counter++;
 	
 	@Override
 	public String toString() {
@@ -17,13 +17,19 @@ class CountedInteger{
 }
 
 public class FiledList<T> {
-	private Class<T> type;
-	public FiledList(Class<T> type){
-		this.type=type;
+	private final Class<T> type;
+	
+	public FiledList(Class<T> type) {
+		this.type = type;
 	}
 	
-	public List<T> create(int nElements){
-		List<T> result=new ArrayList<>();
+	public static void main(String[] args) {
+		FiledList<CountedInteger> countedIntegerFiledList = new FiledList<>(CountedInteger.class);
+		System.out.println(countedIntegerFiledList.create(15));
+	}
+	
+	public List<T> create(int nElements) {
+		List<T> result = new ArrayList<>();
 		for (int i = 0; i < nElements; i++) {
 			try {
 				result.add(type.newInstance());
@@ -34,10 +40,5 @@ public class FiledList<T> {
 			}
 		}
 		return result;
-	}
-	
-	public static void main(String[] args) {
-		FiledList<CountedInteger> countedIntegerFiledList = new FiledList<>(CountedInteger.class);
-		System.out.println(countedIntegerFiledList.create(15));
 	}
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface Animal {
-	public List<Animal> getAnimals();
+	List<Animal> getAnimals();
 }
 
 class Dog implements Animal {

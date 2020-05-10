@@ -9,8 +9,8 @@ package xmht.datastructuresandalgorithms.datastructure.LinkedList;
  * 双向链表 允许向前向后遍历整个链表
  */
 public class DoublyLinked {
-	private DoublyLink next;
-	private DoublyLink previous;
+	private final DoublyLink next;
+	private final DoublyLink previous;
 	
 	public DoublyLinked() {
 		this.next = null;

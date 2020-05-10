@@ -20,12 +20,13 @@ dubbo消费者初始化的时候生成代理，也是使用的动态代理。
 hibernate的懒加载。
  */
 
-interface Interface2{
+interface Interface2 {
 	void doSomething();
+	
 	void somethingElse(String arg);
 }
 
-class RealObject2 implements Interface2{
+class RealObject2 implements Interface2 {
 	
 	@Override
 	public void doSomething() {
@@ -34,20 +35,19 @@ class RealObject2 implements Interface2{
 	
 	@Override
 	public void somethingElse(String arg) {
-		System.out.println("somethingElse "+arg);
+		System.out.println("somethingElse " + arg);
 	}
 }
 
 
-
-public class DynamicProxyHandler implements InvocationHandler{
-	private Object proxied;
+public class DynamicProxyHandler implements InvocationHandler {
+	private final Object proxied;
 	
 	public DynamicProxyHandler(Object proxied) {
 		this.proxied = proxied;
 	}
 	
-	public <T> T getProxy(){
+	public <T> T getProxy() {
 		return (T) Proxy.newProxyInstance(
 				proxied.getClass().getClassLoader(),
 				proxied.getClass().getInterfaces(),
@@ -60,29 +60,29 @@ public class DynamicProxyHandler implements InvocationHandler{
 	proxy真实对象，method我们调用真实对象的方法，args要调用真实对象方法时接受的参数
 	 */
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		System.out.println(" proxy: "+proxy.getClass() +", method: "+method+",args: "+args);
-		System.out.println("========= "+proxy.getClass().getInterfaces());
-		if (args!=null){
-			for (Object arg:args) {
-				System.out.println(" "+arg);
+		System.out.println(" proxy: " + proxy.getClass() + ", method: " + method + ",args: " + args);
+		System.out.println("========= " + proxy.getClass().getInterfaces());
+		if (args != null) {
+			for (Object arg : args) {
+				System.out.println(" " + arg);
 			}
 		}
 		/*
 		执行被代理的操作，然后使用Method.invoke()将请求转发给代理对象，并传入必须参数
 		 */
-		return method.invoke(proxied,args);
+		return method.invoke(proxied, args);
 	}
 }
 
-class SimpleDynamicProxy{
+class SimpleDynamicProxy {
 	//动态代理可以将所有调用重定向到调用处理器，因此通常会向调用处理器的构造器传递给一个"实际"对象的引用，从而使得调用处理器在执行其中介任务时，可以将请求转发
-	public static void consumer(Interface2 ifac){
+	public static void consumer(Interface2 ifac) {
 		ifac.doSomething();//当调用方法的时候，才开始调用InvocationHandler的实现
 		ifac.somethingElse("bonobo");
 	}
 	
 	public static void main(String[] args) {
-		RealObject2 realObject=new RealObject2();
+		RealObject2 realObject = new RealObject2();
 //		consumer(realObject);
 		
 		//insert a proxy and call again

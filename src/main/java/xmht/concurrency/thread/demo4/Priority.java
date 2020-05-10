@@ -14,28 +14,28 @@ public class Priority {
 	public static void main(String[] args) {
 		ArrayList<Job> jobs = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
-			int priority=i<5?Thread.MIN_PRIORITY:Thread.MAX_PRIORITY;
+			int priority = i < 5 ? Thread.MIN_PRIORITY : Thread.MAX_PRIORITY;
 			Job job = new Job(priority);
 			jobs.add(job);
 			Thread thread = new Thread(job, "Thread" + i);
 			thread.setPriority(priority);
 			thread.start();
 		}
-		notStart=false;
+		notStart = false;
 		try {
 			TimeUnit.SECONDS.sleep(10);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		notEnd=false;
+		notEnd = false;
 		for (Job job : jobs) {
-			System.out.println("Job Priority:"+job.priority+", Count:"+job.jobCount);
+			System.out.println("Job Priority:" + job.priority + ", Count:" + job.jobCount);
 		}
 	}
 	
 	
 	static class Job implements Runnable {
-		private int priority;
+		private final int priority;
 		private long jobCount;
 		
 		public Job(int priority) {

@@ -30,7 +30,7 @@ public class Reference {
 		WeakReference<String> stringWeakReference = new WeakReference<String>("String");
 		
 		WeakHashMap<String, String> stringStringWeakHashMap = new WeakHashMap<>();
-		stringStringWeakHashMap.put("a","a");
+		stringStringWeakHashMap.put("a", "a");
 		
 		/*
 		 虚引用
@@ -52,6 +52,6 @@ public class Reference {
 因为这时候，对象已经从内存中销毁了。因为虚引用不能被用作让其指向的对象重生，所以其对象会在垃圾回收的第一个周期就将被清理掉。
 		 */
 		
-		PhantomReference<String> prf = new PhantomReference<String>(new String("str"), new ReferenceQueue<>());
+		PhantomReference<String> prf = new PhantomReference<String>("str", new ReferenceQueue<>());
 	}
 }

@@ -25,9 +25,10 @@ public ShowMethods()
  */
 public class ShowMethods {
 	//去掉命名修饰词
-	private static Pattern pattern = Pattern.compile("\\w+\\.");
+	private static final Pattern pattern = Pattern.compile("\\w+\\.");
 	
-	protected static void test(){}
+	protected static void test() {
+	}
 	
 	
 	public static void main(String[] args) throws ClassNotFoundException {
@@ -40,7 +41,7 @@ public class ShowMethods {
 			System.out.println(pattern.matcher(me.toString()).replaceAll(""));
 //			System.out.println(me.toString());
 		}
-		for (Constructor con :constructors) {
+		for (Constructor con : constructors) {
 			System.out.println(pattern.matcher(con.toString()).replaceAll(""));
 //			System.out.println(con.toString());
 		}

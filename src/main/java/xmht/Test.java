@@ -10,7 +10,7 @@ public class Test {
 		System.out.println(null instanceof Object);
 		
 		String constantString = "interned Baeldung";
-		String newString = new String("interned Baeldung");
+		String newString = "interned Baeldung";
 		
 		System.out.println(constantString == newString);
 		

@@ -8,25 +8,25 @@ package xmht.javabase;
 
  */
 public class InstanceInitializer {
-	private int j = getI();
 	private int i = 1;
-	private int j1 = i + 1;//实例变量初始化器
+	private final int j = getI();
+	private final int j1 = i + 1;//实例变量初始化器
 	
 	{
-		i=12;//实例初始化器
+		i = 12;//实例初始化器
 	}
 	
 	public InstanceInitializer() {
 		i = 2;
 	}
 	
-	private int getI() {
-		return i;
-	}
-	
 	public static void main(String[] args) {
 		InstanceInitializer ii = new InstanceInitializer();
 		System.out.println(ii.j);
 		System.out.println(ii.i);
+	}
+	
+	private int getI() {
+		return i;
 	}
 }

@@ -40,7 +40,7 @@ class Implementation implements SomeMethods {
 }
 
 public class DynamicProxyMethodSelector implements InvocationHandler {
-	private Object proxied;
+	private final Object proxied;
 	
 	public DynamicProxyMethodSelector(Object proxied) {
 		this.proxied = proxied;

@@ -5,8 +5,8 @@ package xmht.concurrency.thread.demo4;
  * @date 2019-08-14
  */
 public class DeadLockDemo {
-	private static String A="A";
-	private static String B="B";
+	private static final String A = "A";
+	private static final String B = "B";
 	
 	public static void main(String[] args) {
 		try {
@@ -16,7 +16,7 @@ public class DeadLockDemo {
 		}
 	}
 	
-	private static void deadLock(){
+	private static void deadLock() {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {

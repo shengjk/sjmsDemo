@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * @date 2019/9/2
  */
 public class ConnectionPool {
-	private LinkedList<Connection> pool = new LinkedList<Connection>();
+	private final LinkedList<Connection> pool = new LinkedList<Connection>();
 	
 	public ConnectionPool(int initialSize) {
 		if (initialSize > 0) {

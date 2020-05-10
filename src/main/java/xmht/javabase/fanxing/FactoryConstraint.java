@@ -5,26 +5,28 @@ package xmht.javabase.fanxing;
  */
 
 //解决类型擦除
-interface FactoryI<T>{
+interface FactoryI<T> {
 	T create();
 }
-class Foo2<T>{
-	private T x;
-	public <F extends FactoryI<T>> Foo2(F factory){
-		x=factory.create();
+
+class Foo2<T> {
+	private final T x;
+	
+	public <F extends FactoryI<T>> Foo2(F factory) {
+		x = factory.create();
 	}
 }
 
 
-class IntegerFactory implements FactoryI<Integer>{
+class IntegerFactory implements FactoryI<Integer> {
 	@Override
 	public Integer create() {
 		return new Integer(0);
 	}
 }
 
-class Widget{
-	public static class Factory implements FactoryI<Widget>{
+class Widget {
+	public static class Factory implements FactoryI<Widget> {
 		@Override
 		public Widget create() {
 			return new Widget();
@@ -41,35 +43,31 @@ public class FactoryConstraint {
 }
 
 
-
-
-
-
-
-
-
-abstract class GenericWithCreate<T>{
+abstract class GenericWithCreate<T> {
 	final T element;
 	
 	public GenericWithCreate() {
 		this.element = create();
 	}
+	
 	public abstract T create();
 }
-class X{}
 
-class Creator extends GenericWithCreate<X>{
+class X {
+}
+
+class Creator extends GenericWithCreate<X> {
+	public static void main(String[] args) {
+		Creator c = new Creator();
+		c.f();
+	}
+	
 	@Override
 	public X create() {
 		return new X();
 	}
-	void f(){
+	
+	void f() {
 		System.out.println(element.getClass().getSimpleName());
-	}
-	
-	
-	public static void main(String[] args) {
-		Creator c = new Creator();
-		c.f();
 	}
 }

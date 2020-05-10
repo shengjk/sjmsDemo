@@ -17,21 +17,6 @@ enum Shrubbery {
 	GROUND, CRAWLING, HANGING
 }
 
-public class EnumClass {
-	public static void main(String[] args) {
-		for (Shrubbery s : Shrubbery.values()) {
-			System.out.println(s);
-		}
-		for (String s : "HANGING CRAWLING GROUND".split(" ")) {
-			Shrubbery shrubbery = Enum.valueOf(Shrubbery.class, s);
-			System.out.println(shrubbery);
-			System.out.println(shrubbery.getDeclaringClass().getName());
-			System.out.println(shrubbery.getClass().getName());
-		}
-	}
-}
-
-
 /*
 javap -p  OzWitch.class
 Compiled from "EnumClass.java"
@@ -57,14 +42,10 @@ enum OzWitch {
 	EAST("east"),
 	SOUTH("south");
 	
-	private String description;
+	private final String description;
 	
-	private OzWitch(String description) {
+	OzWitch(String description) {
 		this.description = description;
-	}
-	
-	public String getDescription() {
-		return description;
 	}
 	
 	public static void main(String[] args) {
@@ -72,11 +53,23 @@ enum OzWitch {
 			System.out.println(witch.getDescription());
 		}
 	}
+	
+	public String getDescription() {
+		return description;
+	}
 }
 
 
 enum SpaceShip {
 	SCOUT, CARGO, TRANSPORT, CRUISER, BATTLESHIP, MOTHERSHIP;
+	
+	public static void main(String[] args) {
+		for (SpaceShip s : SpaceShip.values()) {
+			System.out.println(s);
+//			System.out.println(s.getDeclaringClass().getEnumConstants()[0]);
+		
+		}
+	}
 	
 	@Override
 	public String toString() {
@@ -84,19 +77,132 @@ enum SpaceShip {
 		String lower = id.substring(1).toLowerCase();
 		return id.charAt(0) + lower;
 	}
-	
-	public static void main(String[] args) {
-		for (SpaceShip s : SpaceShip.values()) {
-			System.out.println(s);
-//			System.out.println(s.getDeclaringClass().getEnumConstants()[0]);
-			
-		}
-	}
 }
 
 
 enum Signal {
-	GREEN, YELLOW, RED;
+	GREEN, YELLOW, RED
+}
+
+
+//枚举类不一般情况下应该是不提供set方法的
+enum CompanyEnum {
+	SF("顺丰速运", 1001), YTO("圆通速递", 1002), STO("申通物流", 1003), YD("韵达快运", 1004), YZPY("中国邮政", 1005);
+	private String company;
+	private int code;
+	
+	CompanyEnum(String company, int code) {
+		this.company = company;
+		this.code = code;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(CompanyEnum.SF.getCode());
+		System.out.println(CompanyEnum.SF.getCompany());
+		CompanyEnum.SF.setCode(111111);
+		System.out.println(CompanyEnum.SF.getCode());
+	}
+	
+	public String getCompany() {
+		return company;
+	}
+	
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
+	public int getCode() {
+		return code;
+	}
+	
+	public void setCode(int code) {
+		this.code = code;
+	}
+}
+
+enum GenderEnum {
+	MAN(0),
+	WOMEN(1),
+	UNKNOWN(2);
+	private final int code;
+	
+	GenderEnum(int code) {
+		this.code = code;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(GenderEnum.MAN.code);
+	}
+}
+
+
+enum Explore {HERE, THERE}
+
+
+enum CartoonCharacter implements Gengrator<CartoonCharacter> {
+	SLEEP, SPANKY, PUNCHY, SILLY, BOUNCY;
+	private final Random random = new Random(47);
+	
+	public static void main(String[] args) {
+		System.out.println(CartoonCharacter.BOUNCY.next());
+	}
+	
+	public CartoonCharacter next() {
+		return values()[random.nextInt(values().length)];
+	}
+}
+
+
+enum Course {
+	APPETIZER(Food.Appetizer.class);
+	
+	private final Food[] values;
+	
+	Course(Class<? extends Food> kind) {
+		values = kind.getEnumConstants();
+	}
+}
+
+enum AlarmPoints {
+	STAIR1, STAIR2, LOBBY, OFFICE1, OFFICE2, OFFICE3, OFFICE5, OFFICE4,
+}
+
+
+/**
+ * 使用接口来组织枚举类。这种需求有时源自我们希望扩展原enum中的元素，有时是因为我们希望使用子类将一个enum中的元素进行分组
+ * <p>
+ * 对于enum而言，实现接口是使其子类化的唯一办法
+ */
+interface Food {
+	enum Appetizer implements Food {
+		SALAD, SOUP
+	}
+	
+	enum MainCourse implements Food {
+		LASAGNE, BURRITO, PAD_THAI
+	}
+	
+	enum Dessert implements Food {
+		TIRAMISU, GELATO
+	}
+	
+	enum Coffee implements Food {
+		BLACK_COFFEE, DECAF_COFFEE
+	}
+}
+
+public class EnumClass {
+	public static void main(String[] args) {
+		for (Shrubbery s : Shrubbery.values()) {
+			System.out.println(s);
+		}
+		for (String s : "HANGING CRAWLING GROUND".split(" ")) {
+			Shrubbery shrubbery = Enum.valueOf(Shrubbery.class, s);
+			System.out.println(shrubbery);
+			System.out.println(shrubbery.getDeclaringClass().getName());
+			System.out.println(shrubbery.getClass().getName());
+		}
+	}
 }
 
 class TraffcLight {
@@ -116,61 +222,6 @@ class TraffcLight {
 	}
 	
 }
-
-
-//枚举类不一般情况下应该是不提供set方法的
-enum CompanyEnum {
-	SF("顺丰速运", 1001), YTO("圆通速递", 1002), STO("申通物流", 1003), YD("韵达快运", 1004), YZPY("中国邮政", 1005);
-	private String company;
-	private int code;
-	
-	private CompanyEnum(String company, int code) {
-		this.company = company;
-		this.code = code;
-	}
-	
-	public String getCompany() {
-		return company;
-	}
-	
-	public void setCompany(String company) {
-		this.company = company;
-	}
-	
-	public int getCode() {
-		return code;
-	}
-	
-	public void setCode(int code) {
-		this.code = code;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(CompanyEnum.SF.getCode());
-		System.out.println(CompanyEnum.SF.getCompany());
-		CompanyEnum.SF.setCode(111111);
-		System.out.println(CompanyEnum.SF.getCode());
-	}
-}
-
-
-enum GenderEnum {
-	MAN(0),
-	WOMEN(1),
-	UNKNOWN(2);
-	private int code;
-	
-	GenderEnum(int code) {
-		this.code = code;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(GenderEnum.MAN.code);
-	}
-}
-
-
-enum Explore {HERE, THERE}
 
 class Reflection {
 	public static Set<String> analyze(Class<?> enumClass) {
@@ -195,72 +246,11 @@ class Reflection {
 	}
 }
 
-
-enum CartoonCharacter implements Gengrator<CartoonCharacter> {
-	SLEEP, SPANKY, PUNCHY, SILLY, BOUNCY;
-	private Random random = new Random(47);
-	
-	public CartoonCharacter next() {
-		return values()[random.nextInt(values().length)];
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(CartoonCharacter.BOUNCY.next());
-	}
-}
-
-
-/**
- * 使用接口来组织枚举类。这种需求有时源自我们希望扩展原enum中的元素，有时是因为我们希望使用子类将一个enum中的元素进行分组
- *
- * 对于enum而言，实现接口是使其子类化的唯一办法
- */
-interface Food {
-	enum Appetizer implements Food {
-		SALAD, SOUP;
-	}
-	
-	enum MainCourse implements Food {
-		LASAGNE, BURRITO, PAD_THAI;
-	}
-	
-	enum Dessert implements Food {
-		TIRAMISU, GELATO;
-	}
-	
-	enum Coffee implements Food {
-		BLACK_COFFEE, DECAF_COFFEE;
-	}
-}
-
 class TypeOfFood {
 	public static void main(String[] args) {
 		Food food = Food.Appetizer.SALAD;
 		food = Food.MainCourse.BURRITO;
 	}
-}
-
-
-
-enum Course{
-	APPETIZER(Food.Appetizer.class);
-	
-	private Food[] values;
-	private Course(Class<? extends Food> kind){
-		values=kind.getEnumConstants();
-	}
-}
-
-
-
-
-
-
-
-
-
-enum AlarmPoints {
-	STAIR1, STAIR2, LOBBY, OFFICE1, OFFICE2, OFFICE3, OFFICE5, OFFICE4,
 }
 
 class EnumSets {

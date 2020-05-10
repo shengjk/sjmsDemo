@@ -12,16 +12,18 @@ import java.lang.reflect.Method;
 
 //权限验证的方法拦截器
 class AuthProxy2 implements MethodInterceptor {
-	private String name ;
+	private final String name;
+	
 	//传入用户名称
-	public AuthProxy2(String name){
+	public AuthProxy2(String name) {
 		this.name = name;
 	}
+	
 	@Override
 	public Object intercept(Object arg0, Method arg1, Object[] arg2,
 							MethodProxy arg3) throws Throwable {
 		//用户进行判断
-		if(!"张三".equals(name)){
+		if (!"张三".equals(name)) {
 			System.out.println("你没有权限！");
 			return null;
 		}
@@ -30,18 +32,19 @@ class AuthProxy2 implements MethodInterceptor {
 }
 
 class TableDAOFactory2 {
-	private static TableDAO tDao = new TableDAO();
-	public static TableDAO getInstance(){
+	private static final TableDAO tDao = new TableDAO();
+	
+	public static TableDAO getInstance() {
 		return tDao;
 	}
 	
-	public static TableDAO getAuthInstance(AuthProxy2 authProxy){
+	public static TableDAO getAuthInstance(AuthProxy2 authProxy) {
 		Enhancer en = new Enhancer();
 		//进行代理
 		en.setSuperclass(TableDAO.class);
 		en.setCallback(authProxy);
 		//生成代理实例
-		return (TableDAO)en.create();
+		return (TableDAO) en.create();
 	}
 }
 
@@ -52,7 +55,8 @@ public class CglibProxyClient2 {
 		haveAuth();
 		haveNoAuth();
 	}
-	public static void doMethod(TableDAO dao){
+	
+	public static void doMethod(TableDAO dao) {
 		dao.create();
 		dao.query();
 		dao.update();
@@ -60,11 +64,12 @@ public class CglibProxyClient2 {
 	}
 	
 	
-	public static void haveAuth(){
+	public static void haveAuth() {
 		TableDAO tDao = TableDAOFactory2.getAuthInstance(new AuthProxy2("张三"));
 		doMethod(tDao);
 	}
-	public static void haveNoAuth(){
+	
+	public static void haveNoAuth() {
 		TableDAO tDao = TableDAOFactory2.getAuthInstance(new AuthProxy2("李四"));
 		doMethod(tDao);
 	}

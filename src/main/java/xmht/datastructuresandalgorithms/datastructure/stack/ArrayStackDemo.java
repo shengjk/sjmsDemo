@@ -13,8 +13,8 @@ public class ArrayStackDemo {
 }
 
 class ArrayStack {
-	private int maxSize;
-	private int[] stack;
+	private final int maxSize;
+	private final int[] stack;
 	private int top = -1;
 	
 	public ArrayStack(int maxSize) {

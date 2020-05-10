@@ -8,14 +8,14 @@ package xmht.sjms.SingletonModel;
 public enum CacheSingleton {
 	INSTANCE;
 	
-	private String a;
+	private final String a;
 	
 	CacheSingleton() {
 		System.out.println("初始化缓存变量");
-		this.a="1";
+		this.a = "1";
 	}
 	
-	public String getA(){
+	public String getA() {
 		return a;
 	}
 }

@@ -5,6 +5,6 @@ package xmht.sjms.structureModel.bridge;
  */
 public interface Sourceable {
 	
-	public void method();
+	void method();
 	
 }

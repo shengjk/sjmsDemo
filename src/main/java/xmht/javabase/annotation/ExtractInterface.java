@@ -4,6 +4,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
 /**
  * Created by shengjk1 on 2018/4/11
  */
@@ -11,11 +12,16 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
 public @interface ExtractInterface {
-	public String value();
+	String value();
 }
 
 @ExtractInterface("IMultiplier")
 class Multiplier {
+	public static void main(String[] args) {
+		Multiplier multiplier = new Multiplier();
+		System.out.println(multiplier.multiplier(11, 16));
+	}
+	
 	public int multiplier(int x, int y) {
 		int total = 0;
 		for (int i = 0; i < x; i++) {
@@ -26,11 +32,6 @@ class Multiplier {
 	
 	private int add(int x, int y) {
 		return x + y;
-	}
-	
-	public static void main(String[] args) {
-		Multiplier multiplier=new Multiplier();
-		System.out.println(multiplier.multiplier(11,16));
 	}
 }
 

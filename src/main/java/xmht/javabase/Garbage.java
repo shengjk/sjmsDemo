@@ -17,6 +17,7 @@ class Chair {
 		}
 	}
 	
+	@Override
 	protected void finalize() {
 		if (!gcrun) {
 			gcrun = true;
@@ -33,9 +34,10 @@ class Chair {
 		}
 		
 		finalized++;
-		if (finalized >= created)
+		if (finalized >= created) {
 			System.out.println(
 					"All " + finalized + "finalized");
+		}
 	}
 }
 

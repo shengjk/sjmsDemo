@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 被更新的字段必须使用 public volatile 修饰符
  */
 public class AtomicIntegerFiledUpdaterTest {
-	private static AtomicIntegerFieldUpdater a = AtomicIntegerFieldUpdater.newUpdater(User.class, "old");
+	private static final AtomicIntegerFieldUpdater a = AtomicIntegerFieldUpdater.newUpdater(User.class, "old");
 	
 	public static void main(String[] args) {
 		User conan = new User("conan", 10);
@@ -20,8 +20,8 @@ public class AtomicIntegerFiledUpdaterTest {
 }
 
 class User {
-	private String name;
 	public volatile int old;
+	private String name;
 	
 	public User(String name, int old) {
 		this.name = name;

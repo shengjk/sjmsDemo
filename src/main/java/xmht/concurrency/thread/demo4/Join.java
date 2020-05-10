@@ -28,7 +28,7 @@ public class Join {
 	}
 	
 	static class Domino implements Runnable {
-		private Thread thread;
+		private final Thread thread;
 		
 		public Domino(Thread thread) {
 			this.thread = thread;

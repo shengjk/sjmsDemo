@@ -135,8 +135,8 @@ public class Calcaulator1 {
 }
 
 class ArrayStack2 {
-	private int maxSize;
-	private int[] stack;
+	private final int maxSize;
+	private final int[] stack;
 	private int top = -1;
 	
 	public ArrayStack2(int maxSize) {

@@ -5,23 +5,27 @@ package xmht.javabase.classinfofanshe;
  */
 
 class TableDAO {
-	public void create(){
+	public void create() {
 		System.out.println("create() is running !");
 	}
-	public void query(){
+	
+	public void query() {
 		System.out.println("query() is running !");
 	}
-	public void update(){
+	
+	public void update() {
 		System.out.println("update() is running !");
 	}
-	public void delete(){
+	
+	public void delete() {
 		System.out.println("delete() is running !");
 	}
 }
 
 class TableDAOFactory {
-	private static TableDAO tDao = new TableDAO();
-	public static TableDAO getInstance(){
+	private static final TableDAO tDao = new TableDAO();
+	
+	public static TableDAO getInstance() {
 		return tDao;
 	}
 }
@@ -32,7 +36,8 @@ public class CglibProxyClient1 {
 		TableDAO tableDao = TableDAOFactory.getInstance();
 		doMethod(tableDao);
 	}
-	public static void doMethod(TableDAO dao){
+	
+	public static void doMethod(TableDAO dao) {
 		dao.create();
 		dao.query();
 		dao.update();

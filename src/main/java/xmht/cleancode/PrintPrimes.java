@@ -6,12 +6,12 @@ package xmht.cleancode;
  */
 public class PrintPrimes {
 	public static void main(String[] args) {
-		final int M=1000;
-		final int RR=50;
-		final int CC=4;
-		final int WW=10;
-		final int ORDMAX=30;
-		int P[]=new int[M+1];
+		final int M = 1000;
+		final int RR = 50;
+		final int CC = 4;
+		final int WW = 10;
+		final int ORDMAX = 30;
+		int[] P = new int[M + 1];
 		int PAGENUMBER;
 		int PAGEOFFSET;
 		int ROWOFFSET;
@@ -22,13 +22,13 @@ public class PrintPrimes {
 		int ORD;
 		int SQUARE;
 		int N;
-		int MULT[]=new int[ORDMAX+1];
+		int[] MULT = new int[ORDMAX + 1];
 		
-		J=1;
-		K=1;
-		P[1]=2;
-		ORD=2;
-		SQUARE=9;
+		J = 1;
+		K = 1;
+		P[1] = 2;
+		ORD = 2;
+		SQUARE = 9;
 		
 	}
 }

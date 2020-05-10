@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DbTable {
-	public String name() default "";
+	String name() default "";
 }
 
 @Target(ElementType.FIELD)
@@ -53,21 +53,20 @@ public @interface DbTable {
 //@DbTable(name = "哈哈哈哈")
 @DbTable
 class Member {
+	static int memberCount;
 	/*
 	如果程序员的注解中定义了名为value的元素，并且在应用改注解的时候，如果该元素是唯一需要赋值的一个元素，那么此时唔需要使用名=值对的这种语法，而只需要
 	在括号内给出value元素所需的值即可
 	 */
 	@SQLString(value = 50, name = "5000")
 //	@SQLInteger
-	String lasttName;
+			String lasttName;
 	@SQLInteger
 	Integer age;
-	
 	@SQLString(30)//只对value的字段进行赋值
-	String firstName;
+			String firstName;
 	@SQLString(id = 30, constraints = @Constraints(primaryKey = true))
 	String handle;//
-	static int memberCount;
 	
 	
 }

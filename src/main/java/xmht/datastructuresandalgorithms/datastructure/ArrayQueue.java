@@ -12,16 +12,43 @@ package xmht.datastructuresandalgorithms.datastructure;
 */
 
 public class ArrayQueue {
-	private int maxSize;
+	private final int maxSize;
+	private final Integer[] intArr;
 	private int rear;
 	private int front;
-	private Integer[] intArr;
 	
 	public ArrayQueue(int maxSize) {
 		this.maxSize = maxSize;
 		intArr = new Integer[maxSize];
 		rear = -1;
 		front = -1;
+	}
+	
+	public static void main(String[] args) {
+		ArrayQueue arrayQueue = new ArrayQueue(10);
+		arrayQueue.addQueue(1);
+		arrayQueue.addQueue(2);
+		arrayQueue.addQueue(3);
+		arrayQueue.getQueue();
+		arrayQueue.getQueue();
+		arrayQueue.addQueue(4);
+		arrayQueue.addQueue(5);
+		arrayQueue.getQueue();
+		arrayQueue.getQueue();
+		arrayQueue.getQueue();
+		arrayQueue.getQueue();
+		arrayQueue.addQueue(4);
+		arrayQueue.addQueue(5);
+		arrayQueue.addQueue(6);
+		arrayQueue.getQueue();
+		arrayQueue.getQueue();
+		arrayQueue.getQueue();
+		arrayQueue.addQueue(7);
+		arrayQueue.addQueue(8);
+		arrayQueue.addQueue(9);
+		arrayQueue.addQueue(10);
+		
+		arrayQueue.display();
 	}
 	
 	public void addQueue(int a) {
@@ -50,32 +77,5 @@ public class ArrayQueue {
 		for (int i = front + 1; i <= rear; i++) {
 			System.out.println(intArr[i % maxSize]);
 		}
-	}
-	
-	public static void main(String[] args) {
-		ArrayQueue arrayQueue = new ArrayQueue(10);
-		arrayQueue.addQueue(1);
-		arrayQueue.addQueue(2);
-		arrayQueue.addQueue(3);
-		arrayQueue.getQueue();
-		arrayQueue.getQueue();
-		arrayQueue.addQueue(4);
-		arrayQueue.addQueue(5);
-		arrayQueue.getQueue();
-		arrayQueue.getQueue();
-		arrayQueue.getQueue();
-		arrayQueue.getQueue();
-		arrayQueue.addQueue(4);
-		arrayQueue.addQueue(5);
-		arrayQueue.addQueue(6);
-		arrayQueue.getQueue();
-		arrayQueue.getQueue();
-		arrayQueue.getQueue();
-		arrayQueue.addQueue(7);
-		arrayQueue.addQueue(8);
-		arrayQueue.addQueue(9);
-		arrayQueue.addQueue(10);
-		
-		arrayQueue.display();
 	}
 }

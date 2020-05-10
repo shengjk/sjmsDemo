@@ -1,5 +1,7 @@
 package xmht.datastructuresandalgorithms.algorithms.sort;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Arrays;
  */
 public class MergetSort {
 	public static void main(String[] args) {
-		int arr[] = {8, 4, 5, 7, 1, 3, 6, 2};
+		int[] arr = {8, 4, 5, 7, 1, 3, 6, 2};
 		int[] temp = new int[arr.length];
 		mergeSort(arr, 0, arr.length - 1, temp);
 		System.out.println(Arrays.toString(arr));
@@ -36,7 +38,7 @@ public class MergetSort {
 	 * @param right 要合并数组的最右边
 	 * @param temp  临时数组
 	 */
-	public static void merge(int[] arr, int left, int mid, int right, int[] temp) {
+	public static void merge(int @NotNull [] arr, int left, int mid, int right, int[] temp) {
 		System.out.println("merge    left:" + arr[left] + " right:" + arr[right]);
 		//左边有序序列的初始索引
 		int i = left;

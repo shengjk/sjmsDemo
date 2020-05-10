@@ -8,8 +8,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2019-08-15
  */
 public class Counter {
-	private AtomicInteger atomicInteger=new AtomicInteger(0);
-	private int i=0;
+	private final AtomicInteger atomicInteger = new AtomicInteger(0);
+	private int i = 0;
 	
 	public static void main(String[] args) {
 		final Counter cas = new Counter();
@@ -44,15 +44,15 @@ public class Counter {
 		
 		System.out.println(cas.i);
 		System.out.println(cas.atomicInteger.get());
-		System.out.println(System.currentTimeMillis()-start);
+		System.out.println(System.currentTimeMillis() - start);
 	}
 	
 	//使用 cas 实现线程安全的计数器
-	private void safeCount(){
-		for (;;){
-			int i =atomicInteger.get();
+	private void safeCount() {
+		for (; ; ) {
+			int i = atomicInteger.get();
 			boolean suc = atomicInteger.compareAndSet(i, ++i);
-			if (suc){
+			if (suc) {
 				break;
 			}
 		}
@@ -61,7 +61,7 @@ public class Counter {
 	/**
 	 * 非线程安全的计数器
 	 */
-	private void count(){
+	private void count() {
 		i++;
 	}
 }

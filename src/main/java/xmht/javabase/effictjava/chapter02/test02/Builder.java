@@ -5,5 +5,5 @@ package xmht.javabase.effictjava.chapter02.test02;
  * @date 2019-05-14
  */
 public interface Builder<T> {
-	public T build();
+	T build();
 }

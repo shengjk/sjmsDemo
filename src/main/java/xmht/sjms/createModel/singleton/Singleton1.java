@@ -8,12 +8,12 @@ package xmht.sjms.createModel.singleton;
 就是保证JVM中该类的对象有且仅有一个。
  */
 public class Singleton1 {
-	private static Singleton1 instance = null;
+	private static final Singleton1 instance = null;
 	
 	private Singleton1() {
 	}
 	/*
-	*//*
+	 *//*
 	静态工程方法创建实例
 	唯一缺点是不能保证线程安全
 	 *//*
@@ -39,8 +39,8 @@ public class Singleton1 {
 		return instance;
 	}*/
 	
-/*
-	*//*
+	/*
+	 *//*
 静态工程方法创建实例
  *//*
 	public static Singleton1 getInstance() {
@@ -60,7 +60,19 @@ d>B进入synchronized块，由于instance此时不是null，因此它马上离�
 e>此时B线程打算使用Singleton实例，却发现它没有被初始化，于是错误发生了。
 所以程序还是有可能发生错误，其实程序在运行过程是很复杂的，从这点我们就可以看出，尤其是在写多线程环境下的程序更有难度，有挑战性。
 	进一步优化 *//*
-	*/
+	 */
+	
+	public static Singleton1 getInstance() {
+		return SingletonFactory.singleton1;
+	}
+	
+	/*
+	不了解这段代码是干嘛的
+	如果该对象被用于序列化，可以保证在序列化前后保持一致
+	 */
+	public Object readResolve() {
+		return instance;
+	}
 	
 	/*
 	实际情况是，单例模式使用内部类来维护单例的实现，
@@ -71,22 +83,8 @@ e>此时B线程打算使用Singleton实例，却发现它没有被初始化，�
 	这样我们就不用担心上面的问题。
 	同时该方法也只会在第一次调用的时候使用互斥机制，这样就解决了低性能问题。
 	 */
-	private static class SingletonFactory{
-		private static Singleton1 singleton1=new Singleton1();
-	}
-	
-	public static Singleton1 getInstance(){
-		return SingletonFactory.singleton1;
-	}
-	
-	
-	
-	/*
-	不了解这段代码是干嘛的
-	如果该对象被用于序列化，可以保证在序列化前后保持一致
-	 */
-	public Object readResolve() {
-		return instance;
+	private static class SingletonFactory {
+		private static final Singleton1 singleton1 = new Singleton1();
 	}
 	
 }

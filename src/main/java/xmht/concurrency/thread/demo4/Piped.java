@@ -32,7 +32,7 @@ public class Piped {
 	
 	
 	static class Print implements Runnable {
-		private PipedReader in;
+		private final PipedReader in;
 		
 		//PipedReader 传进来
 		public Print(PipedReader in) {
