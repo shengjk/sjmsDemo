@@ -6,15 +6,8 @@ package xmht;
  */
 public class Test {
 	public static void main(String[] args) {
-		System.out.println(null instanceof String);
-		System.out.println(null instanceof Object);
+		String a = "aaa";
 		
-		String constantString = "interned Baeldung";
-		String newString = "interned Baeldung";
-		
-		System.out.println(constantString == newString);
-		
-		String internedString = newString.intern();
-		System.out.println(constantString == internedString);
+		System.out.println((byte) Integer.parseInt("10101000", 2));
 	}
 }

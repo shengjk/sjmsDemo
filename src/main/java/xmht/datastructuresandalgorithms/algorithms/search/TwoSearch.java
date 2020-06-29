@@ -30,5 +30,24 @@ public class TwoSearch {
 		}
 		
 	}
+	
+	
+	public static int binarySearch(int[] arr, int left, int right, int finVal) {
+		if (left > right) {
+			return -1;
+		}
+		
+		int mid = (left + right) / 2;
+		int midVal = arr[mid];
+		
+		//向右递归
+		if (finVal > midVal) {
+			return binarySearch(arr, mid + 1, right, finVal);
+		} else if (finVal < midVal) {
+			return binarySearch(arr, left, mid - 1, finVal);
+		} else {
+			return mid;
+		}
+	}
 }
 
