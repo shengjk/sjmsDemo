@@ -143,7 +143,7 @@ class HeroNode {
 	public String toString() {
 		return "HearNode{" +
 				"no=" + no +
-				", name='" + name + '\'' +
+				",  name='" + name + '\'' +
 				'}';
 	}
 	
