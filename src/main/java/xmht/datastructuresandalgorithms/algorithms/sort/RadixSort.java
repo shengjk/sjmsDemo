@@ -8,11 +8,11 @@ import java.util.Arrays;
  */
 public class RadixSort {
 	public static void main(String[] args) {
-//		int[] arr = {53, 3, 542, 748, 14, 214};
-		int[] arr = new int[8];
-		for (int i = 0; i < 8; i++) {
-			arr[i] = (int) (Math.random() * 8000000);
-		}
+		int[] arr = {4, 10, 2, 100, 20};
+//		int[] arr = new int[8];
+//		for (int i = 0; i < 8; i++) {
+//			arr[i] = (int) (Math.random() * 8000000);
+//		}
 		radixSOrt(arr);
 		System.out.println(Arrays.toString(arr));
 	}

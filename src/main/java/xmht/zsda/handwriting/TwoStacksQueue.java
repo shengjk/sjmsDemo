@@ -1,4 +1,4 @@
-package xmht.datastructuresandalgorithms.zsalgorithms;
+package xmht.zsda.handwriting;
 
 /**
  * @author shengjk1
