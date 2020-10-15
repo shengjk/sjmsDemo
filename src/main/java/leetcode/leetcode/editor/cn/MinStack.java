@@ -46,11 +46,11 @@ import java.util.Stack;
 
 public class MinStack {
 	public static void main(String[] args) {
-		Solution solution = new MinStack().new Solution();
+		MinStack1 solution = new MinStack1();
 	}
 	
 	//leetcode submit region begin(Prohibit modification and deletion)
-	class MinStack {
+	static class MinStack1 {
 		
 		private Stack<Integer> min;
 		private Stack<Integer> data;
@@ -58,7 +58,7 @@ public class MinStack {
 		/**
 		 * initialize your data structure here.
 		 */
-		public MinStack() {
+		public MinStack1() {
 			min = new Stack<Integer>();
 			data = new Stack<Integer>();
 		}

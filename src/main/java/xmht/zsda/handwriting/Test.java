@@ -6,11 +6,12 @@ package xmht.zsda.handwriting;
  */
 public class Test {
 	public static void main(String[] args) {
-		int a = 200;
-		int b = 200;
-		Integer integera = 20;
-		Integer integerb = 20;
-
+		test(1, 2);
 //		System.out.println((a == b) + " " + (integera == integerb));
+	}
+	
+	public static void test(int a, int b) {
+		System.out.println(a);
+		System.out.println(b);
 	}
 }
