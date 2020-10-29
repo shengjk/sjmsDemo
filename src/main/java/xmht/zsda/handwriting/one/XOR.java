@@ -28,7 +28,22 @@ public class XOR {
 		String s2 = "hello,world!";
 		System.out.println(s1 == s2);
 		
+		System.out.println("========");
+		int i1 = 1000;
+		int i2 = 1000;
+		int i3 = 100;
+		int i4 = 100;
 		
+		System.out.println(i1 == i2);
+		System.out.println(i3 == i4);
+		
+		System.out.println("+++++++++++++");
+		
+		Integer i5 = 1000, i6 = 1000, i7 = 100, i8 = 100;
+		System.out.println(i5 == i6);
+		System.out.println(i7 == i8);
 	}
+	
+	// N&(~N+1) 取 N 最右侧的 1
 	
 }

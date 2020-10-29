@@ -7,6 +7,7 @@ package xmht.zsda.handwriting;
 public class QuickSort {
 	
 	
+	// 分成了 2 部分，不大于和大于
 	public static int partition(int[] arr, int L, int R) {
 		if (L > R) {
 			return -1;
@@ -26,6 +27,7 @@ public class QuickSort {
 		swap(arr, ++lessEqual, R);
 		return lessEqual;
 	}
+	
 	
 	public static int[] netherlandsFlag(int[] arr, int L, int R) {
 		if (L < R) {
