@@ -1,34 +1,49 @@
 package xmht.zsda.handwriting.seven;
 
-
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
  * @author shengjk1
- * @date 2020/10/21
+ * @date 2020/10/30
  */
 public class LevelTraversalBT {
-	
-	public static void level(Node head) {
+	//层序遍历
+	public static void levelTraver(Node head) {
 		if (head == null) {
 			return;
 		}
 		Queue<Node> queue = new LinkedList<Node>();
-		queue.offer(head);
+		queue.add(head);
 		while (!queue.isEmpty()) {
-			Node cur = queue.poll();
-			System.out.println(cur);
-			
-			if (cur.left != null) {
-				queue.offer(cur.left);
+			head = queue.poll();
+			System.out.println(head);
+			if (head.left != null) {
+				queue.add(head.left);
 			}
-			
-			if (cur.right != null) {
-				queue.offer(cur.right);
+			if (head.right != null) {
+				queue.add(head.right);
 			}
 		}
-		
+	}
+	
+	//锯齿遍历
+	public static void Jagged(Node head) {
+		if (head == null) {
+			
+		}
+		int cout = 0;
+		Queue<Node> queue = new LinkedList<Node>();
+		queue.add(head);
+		while (!queue.isEmpty()) {
+			//当前层的大小，也可以用来求最大宽度
+			int size = queue.size();
+			ArrayList<Node> nodes = new ArrayList<Node>();
+			for (int i = 0; i < size; i++) {
+//				nodes.
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -40,24 +55,26 @@ public class LevelTraversalBT {
 		head.right.left = new Node(6);
 		head.right.right = new Node(7);
 		
-		level(head);
+		levelTraver(head);
 		System.out.println("========");
 	}
 	
 	public static class Node {
-		int value;
+		int val;
 		Node left;
 		Node right;
 		
-		public Node(int value) {
-			this.value = value;
+		public Node(int val) {
+			this.val = val;
 		}
 		
 		@Override
 		public String toString() {
 			return "Node{" +
-					"value=" + value +
+					"val=" + val +
 					'}';
 		}
 	}
+	
 }
+
