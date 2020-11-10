@@ -13,8 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
 // 实现一个阻塞队列
 public class MyContainer<T> {
 	final private LinkedList<T> lists = new LinkedList<>();
-	final private int MAX = 10;
-	private int count = 0;
+	final private int MAX = 100;
 	
 	private Lock lock = new ReentrantLock();
 	private Condition producer = lock.newCondition();
@@ -25,7 +24,10 @@ public class MyContainer<T> {
 		//启动消费者线程
 		for (int i = 0; i < 10; i++) {
 			new Thread(() -> {
-				for (int j = 0; j < 5; j++) System.out.println(c.get());
+				for (int j = 0; j < 50; j++) {
+					System.out.println(c.get());
+				}
+				;
 			}, "c" + i).start();
 		}
 		
@@ -38,7 +40,7 @@ public class MyContainer<T> {
 //		//启动生产者线程
 		for (int i = 0; i < 2; i++) {
 			new Thread(() -> {
-				for (int j = 0; j < 25; j++) c.put(Thread.currentThread().getName() + " " + j);
+				for (int j = 0; j < 250; j++) c.put(Thread.currentThread().getName() + " " + j);
 			}, "p" + i).start();
 		}
 	}
@@ -50,7 +52,6 @@ public class MyContainer<T> {
 				producer.await();
 			}
 			lists.add(t);
-			++count;
 			//通知所有消费者消费
 			consumer.signalAll();
 		} catch (InterruptedException e) {
@@ -68,7 +69,6 @@ public class MyContainer<T> {
 				consumer.await();
 			}
 			t = lists.removeFirst();
-			count--;
 			producer.signalAll();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
