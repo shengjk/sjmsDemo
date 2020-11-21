@@ -6,39 +6,51 @@ import java.util.HashSet;
 
 /**
  * @author shengjk1
- * @date 2020/10/28
+ * @date 2020/11/19
  */
 /*
-给定一棵二叉树的头节点head，任何两个节点之间都存在距离，
-返回整棵二叉树的最大距离
+ x 参与    树的最大高度
+ x 不参与   max{左树的最大距离，右树的最大距离}
+ 
+最大距离 左右树的高度之和+1 与 最大距离的最大值，因为它要的就是最大距离
 
-二叉树最大距离
-x不参与  最大距离 max{左树最大距离，右树最大距离}
-x参与    最大距离  左树的最大高度+右树的最大高度+1
  */
-public class MaxDistance {
-	
-	public static int maxDistance2(Node head) {
-//		System.out.println("maxDistance:" + process.maxDistance + " height:" + process.height);
-		return process(head).maxDistance;
+public class MaxDistance1 {
+	public static class Node {
+		int value;
+		Node left;
+		Node right;
+		
+		public Node(int value) {
+			this.value = value;
+		}
 	}
 	
-	public static Info process(Node X) {
-		if (X == null) {
+	public static class Info {
+		int height;
+		int maxDistance;
+		
+		public Info(int height, int maxDistance) {
+			this.height = height;
+			this.maxDistance = maxDistance;
+		}
+	}
+	
+	public static Info process(Node x) {
+		if (x == null) {
 			return new Info(0, 0);
 		}
-		Info leftInfo = process(X.left);
-		Info rightInfo = process(X.right);
-		//当前树的高度 等于 max{左树高度，右树高度}+1  加上自己本身
-		int height = Math.max(leftInfo.height, rightInfo.height) + 1;
-		//最大距离 (x参与不参与都包括在内了)
-		int maxDistance = Math.max(
-				Math.max(leftInfo.maxDistance, rightInfo.maxDistance),
-				leftInfo.height + rightInfo.height + 1);
+		Info leftInfo = process(x.left);
+		Info rightInfo = process(x.right);
 		
-		return new Info(maxDistance, height);
+		int height = Math.max(leftInfo.height, rightInfo.height) + 1;
+		//最大距离 左右树的高度之和+1 与 最大距离的最大值，因为它要的就是最大距离
+		int maxDistance = Math.max(
+				leftInfo.height + rightInfo.height + 1,
+				Math.max(leftInfo.maxDistance, rightInfo.maxDistance));
+		
+		return new Info(height, maxDistance);
 	}
-	
 	
 	public static int maxDistance1(Node head) {
 		if (head == null) {
@@ -132,6 +144,11 @@ public class MaxDistance {
 		return head;
 	}
 	
+	public static int maxDistance2(Node head) {
+//		System.out.println("maxDistance:" + process.maxDistance + " height:" + process.height);
+		return process(head).maxDistance;
+	}
+	
 	public static void main(String[] args) {
 		int maxLevel = 4;
 		int maxValue = 100;
@@ -144,25 +161,4 @@ public class MaxDistance {
 		}
 		System.out.println("finish!");
 	}
-	
-	public static class Info {
-		int maxDistance;
-		int height;
-		
-		public Info(int maxDistance, int height) {
-			this.maxDistance = maxDistance;
-			this.height = height;
-		}
-	}
-	
-	public static class Node {
-		int value;
-		Node left;
-		Node right;
-		
-		public Node(int value) {
-			this.value = value;
-		}
-	}
 }
-

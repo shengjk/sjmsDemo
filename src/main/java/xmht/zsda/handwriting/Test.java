@@ -22,10 +22,13 @@ public class Test {
 //		System.out.println(integers.getFirst());
 //		System.out.println(integers.getFirst());
 		
-		System.out.println(integers.getLast());
-		System.out.println(integers.getLast());
-		System.out.println(integers.getLast());
-		System.out.println(integers.getLast());
+		System.out.println(integers.pollLast());
+		System.out.println(integers.pollLast());
+		System.out.println(integers.pollLast());
+		System.out.println(integers.pollLast());
+		System.out.println(integers.pollLast());
+//		System.out.println(integers.getLast());
+		System.out.println(integers.peekLast());
 	}
 	
 	public static void test(int a, int b) {

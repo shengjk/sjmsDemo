@@ -4,13 +4,72 @@ import java.util.ArrayList;
 
 /**
  * @author shengjk1
- * @date 2020/10/28
+ * @date 2020/11/19
  */
 /*
 给定一棵二叉树的头节点head，
 返回这颗二叉树中最大的二叉搜索子树的大小
+
+首先需要判断是二叉搜索树，maxSize( nodes )
+
+涉及到最大值最小值的都返回 null，因为没有办法确定最小值或者最大值的具体值
  */
-public class MaxSubBSTSize {
+public class MaxSubBSTSize1 {
+	public static class Node {
+		int value;
+		Node left;
+		Node right;
+		
+		public Node(int value) {
+			this.value = value;
+		}
+	}
+	
+	public static class Info {
+		boolean isBST;
+		int maxSubBSTSize;
+		int min;
+		int max;
+		
+		public Info(boolean isBST, int maxSubBSTSize, int min, int max) {
+			this.isBST = isBST;
+			this.maxSubBSTSize = maxSubBSTSize;
+			this.min = min;
+			this.max = max;
+		}
+	}
+	
+	public static Info process(Node x) {
+		if (x == null) {
+			return null;
+		}
+		Info leftInfo = process(x.left);
+		Info rightInfo = process(x.right);
+		
+		int min = x.value;
+		int max = x.value;
+		int maxSubBSTSize = 0;
+		if (leftInfo != null) {
+			min = Math.min(leftInfo.min, min);
+			max = Math.max(max, leftInfo.max);
+			maxSubBSTSize = Math.max(maxSubBSTSize, leftInfo.maxSubBSTSize);
+		}
+		if (rightInfo != null) {
+			min = Math.min(min, rightInfo.min);
+			max = Math.max(max, rightInfo.max);
+			maxSubBSTSize = Math.max(maxSubBSTSize, rightInfo.maxSubBSTSize);
+		}
+		
+		boolean isBST = false;
+		if ((leftInfo == null ? true : (leftInfo.isBST && leftInfo.max < x.value))
+				&& (rightInfo == null ? true : (rightInfo.isBST && rightInfo.min > x.value))) {
+			isBST = true;
+			// maxSubBSTSize
+			maxSubBSTSize = (leftInfo == null ? 0 : leftInfo.maxSubBSTSize) +
+					(rightInfo == null ? 0 : rightInfo.maxSubBSTSize) + 1;
+		}
+		return new Info(isBST, maxSubBSTSize, min, max);
+	}
 	
 	public static int getBSTSize(Node head) {
 		if (head == null) {
@@ -53,35 +112,6 @@ public class MaxSubBSTSize {
 		return process(head).maxSubBSTSize;
 	}
 	
-	public static Info process(Node head) {
-		if (head == null) {
-			return null;
-		}
-		Info leftInfo = process(head.left);
-		Info rightInfo = process(head.right);
-		int min = head.value;
-		int max = head.value;
-		int maxSubBSTSize = 0;
-		if (leftInfo != null) {
-			min = Math.min(min, leftInfo.min);
-			max = Math.max(max, leftInfo.max);
-			maxSubBSTSize = Math.max(maxSubBSTSize, leftInfo.maxSubBSTSize);
-		}
-		if (rightInfo != null) {
-			min = Math.min(min, rightInfo.min);
-			max = Math.max(max, rightInfo.max);
-			maxSubBSTSize = Math.max(maxSubBSTSize, rightInfo.maxSubBSTSize);
-		}
-		boolean isBST = false;
-		if ((leftInfo == null ? true : (leftInfo.isBST && leftInfo.max < head.value))
-				&& (rightInfo == null ? true : (rightInfo.isBST && rightInfo.min > head.value))) {
-			isBST = true;
-			maxSubBSTSize = (leftInfo == null ? 0 : leftInfo.maxSubBSTSize)
-					+ (rightInfo == null ? 0 : rightInfo.maxSubBSTSize) + 1;
-		}
-		return new Info(isBST, maxSubBSTSize, min, max);
-	}
-	
 	// for test
 	public static Node generateRandomBST(int maxLevel, int maxValue) {
 		return generate(1, maxLevel, maxValue);
@@ -109,30 +139,6 @@ public class MaxSubBSTSize {
 			}
 		}
 		System.out.println("finish!");
-	}
-	
-	public static class Node {
-		public int value;
-		public Node left;
-		public Node right;
-		
-		public Node(int data) {
-			this.value = data;
-		}
-	}
-	
-	public static class Info {
-		public boolean isBST;
-		public int maxSubBSTSize;
-		public int min;
-		public int max;
-		
-		public Info(boolean is, int size, int mi, int ma) {
-			isBST = is;
-			maxSubBSTSize = size;
-			min = mi;
-			max = ma;
-		}
 	}
 	
 }

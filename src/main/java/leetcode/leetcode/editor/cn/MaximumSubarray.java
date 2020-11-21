@@ -28,7 +28,6 @@ public class MaximumSubarray {
 		public int maxSubArray(int[] nums) {
 			//动态规划
 			//Success: Runtime:1 ms, faster than 95.19% of Java online submissions. Memory Usage:40 MB, less than 34.83% of Java online submissions.
-// 少遍历一次跟多遍历一次对性能基本上无影响，但对内存的影响会有点大
 //			if (nums.length > 0) {
 			int result = nums[0];
 			int sum = 0;

@@ -1,8 +1,6 @@
 package xmht.zsda.handwriting.seven;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author shengjk1
@@ -29,21 +27,36 @@ public class LevelTraversalBT {
 	}
 	
 	//锯齿遍历
-	public static void Jagged(Node head) {
-		if (head == null) {
-			
+	public List<List<Integer>> zigzagLevelOrder(Node root) {
+		List<List<Integer>> lists = new LinkedList<List<Integer>>();
+		if (root == null) {
+			return lists;
 		}
-		int cout = 0;
 		Queue<Node> queue = new LinkedList<Node>();
-		queue.add(head);
+		queue.add(root);
+		int count = 0;
 		while (!queue.isEmpty()) {
-			//当前层的大小，也可以用来求最大宽度
 			int size = queue.size();
-			ArrayList<Node> nodes = new ArrayList<Node>();
+			// 需要一个 list 做缓存，依据 count 来判断是否反转
+			ArrayList<Integer> integers = new ArrayList<>();
 			for (int i = 0; i < size; i++) {
-//				nodes.
+				root = queue.poll();
+				integers.add(root.val);
+				
+				if (root.left != null) {
+					queue.add(root.left);
+				}
+				if (root.right != null) {
+					queue.add(root.right);
+				}
 			}
+			if (count % 2 != 0) {
+				Collections.reverse(integers);
+			}
+			lists.add(integers);
+			count++;
 		}
+		return lists;
 	}
 	
 	public static void main(String[] args) {

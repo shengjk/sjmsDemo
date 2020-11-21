@@ -6,6 +6,7 @@ package xmht.zsda.handwriting.seven;
  */
 public class RecursiveTraversalBT {
 	//前序遍历
+	//头左右
 	public static void pre(Node head) {
 		if (head == null) {
 			return;
@@ -15,7 +16,7 @@ public class RecursiveTraversalBT {
 		pre(head.rihgt);
 	}
 	
-	
+	//左头右
 	public static void in(Node head) {
 		if (head == null) {
 			return;
@@ -25,7 +26,7 @@ public class RecursiveTraversalBT {
 		in(head.rihgt);
 	}
 	
-	
+	//左右头
 	public static void pos(Node head) {
 		if (head == null) {
 			return;

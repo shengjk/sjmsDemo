@@ -114,6 +114,7 @@ public class MaximumWidthOfBinaryTree {
 					TreeNode n = q.poll();
 					if (n.left != null) {
 						q.offer(n.left);
+						//
 						numbers.offer(2 * index + 1);
 					}
 					if (n.right != null) {
@@ -122,6 +123,7 @@ public class MaximumWidthOfBinaryTree {
 					}
 				}
 				if (numbers.size() >= 2) {
+					//
 					max = Math.max(max, numbers.getLast() - numbers.getFirst() + 1);
 				}
 				
