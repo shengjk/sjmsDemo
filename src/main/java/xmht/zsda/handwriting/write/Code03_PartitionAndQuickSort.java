@@ -1,4 +1,4 @@
-package xmht.zsda.handwriting;
+package xmht.zsda.handwriting.write;
 
 public class Code03_PartitionAndQuickSort {
 	
@@ -17,14 +17,13 @@ public class Code03_PartitionAndQuickSort {
 		}
 		int lessEqual = L - 1;
 		int index = L;
-		while (index <= R) {
+		while (index < R) {
 			if (arr[index] <= arr[R]) {
-				// index 与 ++lessEqual 交换
 				swap(arr, index, ++lessEqual);
 			}
 			index++;
 		}
-//		swap(arr, ++lessEqual, R);
+		swap(arr, ++lessEqual, R);
 		return lessEqual;
 	}
 	
@@ -41,17 +40,20 @@ public class Code03_PartitionAndQuickSort {
 		int more = R;     // > 区 左边界
 		int index = L;
 		while (index < more) {
+			//相等的话 index++
 			if (arr[index] == arr[R]) {
 				index++;
+				//小于的话，++less 与 index 互换，然后 index++
 			} else if (arr[index] < arr[R]) {
 				swap(arr, index++, ++less);
-			} else { // >
+			} else { // > 大于的 index 与 --more 互换
 				swap(arr, index, --more);
 			}
 		}
 		swap(arr, more, R);
 		return new int[]{less + 1, more};
 	}
+	
 	
 	public static void quickSort1(int[] arr) {
 		if (arr == null || arr.length < 2) {

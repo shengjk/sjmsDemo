@@ -6,6 +6,7 @@ package xmht.zsda.handwriting.six;
  */
 public class FindFirstIntersectNode {
 	
+	//判断链表是否有环
 	public static Node getLoopNode(Node head) {
 		if (head.next == null || head.next.next == null) {
 			return null;
@@ -115,6 +116,7 @@ public class FindFirstIntersectNode {
 			}
 			return cur1;
 		} else {
+			//判断是否共用一个环
 			cur1 = loop1.next;
 			while (cur1 != loop1) {
 				if (cur1 == loop2) {

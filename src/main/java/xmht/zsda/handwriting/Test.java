@@ -29,6 +29,11 @@ public class Test {
 		System.out.println(integers.pollLast());
 //		System.out.println(integers.getLast());
 		System.out.println(integers.peekLast());
+		
+		int n = 16;
+		int hash = 10;
+		System.out.println((n - 1) & hash);
+		System.out.println(hash & (n - 1));
 	}
 	
 	public static void test(int a, int b) {
