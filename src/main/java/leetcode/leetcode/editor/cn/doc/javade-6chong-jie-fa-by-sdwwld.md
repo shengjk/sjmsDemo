@@ -2,9 +2,8 @@
 ![image.png](https://pic.leetcode-cn.com/c759738650c417a23b1e9636f6f40a553d9258f1cc8907d8da3555b5d2f93e60-image.png)
 ![image.png](https://pic.leetcode-cn.com/bf4c4d4db704e5103f5394d8a790b8235ae160703ffa53b0700650287831b8c9-image.png)
 
-
-
 代码如下
+
 ```
     public int lengthOfLongestSubstring(String s) {
         if (s.length() == 0)
@@ -24,6 +23,7 @@
 
 2，我们还可以用一个队列，把元素不停的加入到队列中，如果有相同的元素，就把队首的元素移除，这样我们就可以保证队列中永远都没有重复的元素
 ![image.png](https://pic.leetcode-cn.com/e0d581509bc8bfa2cecc19a7e65da1629264bfe472ea7f9f83c286ba15b32be9-image.png)
+
 ```
     public int lengthOfLongestSubstring(String s) {
         //用链表实现队列，队列是先进先出的
@@ -36,13 +36,14 @@
             }
             //添加到队尾
             queue.add(c);
-            res = Math.max(res, queue.size());
+            res = Math.max(res, queue.maxSubBSTSize());
         }
         return res;
     }
 ```
 
 3，由于都是字符，所以我们还可以使用数组来代替map
+
 ```
     public int lengthOfLongestSubstring(String s) {
         int[] map = new int[128];
@@ -59,7 +60,9 @@
         return len;
     }
 ```
+
 4,我们还可以再优化一下减少一层while循环
+
 ```
     public int lengthOfLongestSubstring(String s) {
         int[] dict = new int[128];
@@ -74,8 +77,8 @@
     }
 ```
 
-
 5，同样我们还可以使用集合set来代替队列，用两个指针，一个left一个right，如果有重复的就把left指向的给移除（left相当于队首，right相当于队尾）
+
 ```
     public int lengthOfLongestSubstring(String s) {
         int maxLen = 0;
@@ -90,7 +93,9 @@
         return maxLen;
     }
 ```
-6,这里我们还可以改一下，把right-left改为set.size(),顺便再减少一层while循环
+
+6,这里我们还可以改一下，把right-left改为set.maxSubBSTSize(),顺便再减少一层while循环
+
 ```
     public int lengthOfLongestSubstring(String s) {
         int left = 0, right = 0, max = 0;
@@ -100,15 +105,15 @@
                 set.remove(s.charAt(left++));
             } else {
                 set.add(s.charAt(right++));
-                max = Math.max(max, set.size());
+                max = Math.max(max, set.maxSubBSTSize());
             }
         }
         return max;
     }
 ```
 
-
 **如果觉得有用就给个赞吧，你的赞是给我最大的鼓励，也是我写作的最大动力**
 
 ![image.png](https://pic.leetcode-cn.com/d56a80459005b444404d2ad6fbaabdabecd2b9ed3cb2cf432e570c315ae2fcf7-image.png)
+
 ##### 查看更多答案，可扫码关注我微信公众号“**[数据结构和算法](https://img-blog.csdnimg.cn/20190515124616751.jpg)**”

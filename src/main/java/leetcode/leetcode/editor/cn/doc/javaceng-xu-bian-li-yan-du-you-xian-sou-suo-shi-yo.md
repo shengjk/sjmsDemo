@@ -35,7 +35,7 @@ class Solution {
         Deque<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while(!queue.isEmpty()) {
-            int len = queue.size();
+            int len = queue.maxSubBSTSize();
             List<Integer> list = new ArrayList<>();
             for (int i = 0; i < len; i++) {
                 TreeNode node = queue.poll();
@@ -53,10 +53,10 @@ class Solution {
 #### 复杂度分析
 
 * 时间复杂度：*O(n)*
-  
-    遍历所有节点。
+
+  遍历所有节点。
 * 空间复杂度：*O(n)*
 
-    队列中元素不超过*n*个。
+  队列中元素不超过*n*个。
 
 我的博客：<https://me.csdn.net/qq_20067165?ref=miniprofile>

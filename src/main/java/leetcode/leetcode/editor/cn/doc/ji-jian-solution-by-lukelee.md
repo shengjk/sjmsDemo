@@ -2,7 +2,7 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        int lo = 0, hi = nums.size() - 1;
+        int lo = 0, hi = nums.maxSubBSTSize() - 1;
         while (lo < hi) {
             int mid = (lo + hi) / 2;
             if ((nums[0] > target) ^ (nums[0] > nums[mid]) ^ (target > nums[mid]))
@@ -14,6 +14,7 @@ public:
     }
 };
 ```
+
 以二分搜索为基本思路
 
 简要来说：
@@ -31,19 +32,24 @@ public:
 原文的分析是：
 
 注意到原数组为有限制的有序数组（除了在某个点会突然下降外均为升序数组）
- 
-- `if nums[0] <= nums[I]` 那么 `nums[0]` 到 `nums[i]` 为有序数组,那么当 `nums[0] <= target <= nums[i]` 时我们应该在 *0-i* 范围内查找；
 
-- `if nums[i] < nums[0]` 那么在 *0-i* 区间的某个点处发生了下降（旋转），那么 *I+1* 到最后一个数字的区间为有序数组，并且所有的数字都是小于 `nums[0]` 且大于 `nums[i]`，当target不属于 `nums[0]` 到 `nums[i]` 时（`target <= nums[i] < nums[0] or nums[i] < nums[0] <= target`），我们应该在 *0-i* 区间内查找。
-上述三种情况可以总结如下：
+- `if nums[0] <= nums[I]` 那么 `nums[0]` 到 `nums[i]` 为有序数组,那么当 `nums[0] <= target <= nums[i]` 时我们应该在 *
+  0-i* 范围内查找；
+
+- `if nums[i] < nums[0]` 那么在 *0-i* 区间的某个点处发生了下降（旋转），那么 *I+1* 到最后一个数字的区间为有序数组，并且所有的数字都是小于 `nums[0]`
+  且大于 `nums[i]`，当target不属于 `nums[0]` 到 `nums[i]`
+  时（`target <= nums[i] < nums[0] or nums[i] < nums[0] <= target`），我们应该在 *0-i* 区间内查找。 上述三种情况可以总结如下：
+
 ```
     nums[0] <= target <= nums[i]
                target <= nums[i] < nums[0]
                          nums[i] < nums[0] <= target
 ```
+
 所以我们进行三项判断：
 
-`(nums[0] <= target)`，` (target <= nums[i])` ，`(nums[i] < nums[0])`，现在我们想知道这三项中有哪两项为真（明显这三项不可能均为真或均为假（因为这三项可能已经包含了所有情况））
+`(nums[0] <= target)`，` (target <= nums[i])` ，`(nums[i] < nums[0])`
+，现在我们想知道这三项中有哪两项为真（明显这三项不可能均为真或均为假（因为这三项可能已经包含了所有情况））
 
 所以我们现在只需要区别出这三项中有两项为真还是只有一项为真。
 

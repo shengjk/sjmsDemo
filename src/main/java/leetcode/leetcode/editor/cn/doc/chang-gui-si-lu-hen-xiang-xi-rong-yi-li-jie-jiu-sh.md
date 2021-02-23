@@ -43,7 +43,7 @@ class Solution {
         }
 
         //因为时区必定成双存在，倒叙遍历弹栈放入ans数组中即可。
-        int [][] ans = new int[stack.size()/2][2];
+        int [][] ans = new int[stack.maxSubBSTSize()/2][2];
         for(int i = ans.length - 1; i >= 0; i--){
             ans[i][1] = stack.pop();
             ans[i][0] = stack.pop();

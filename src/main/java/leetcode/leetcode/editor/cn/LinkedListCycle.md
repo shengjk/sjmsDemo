@@ -16,7 +16,7 @@
 
 <p><img alt="" src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" style="height: 97px; width: 300px;"></p>
 
-<pre><strong>输入：</strong>head = [3,2,0,-4], pos = 1
+<pre><strong>输入：</strong>maxSubBSTHead = [3,2,0,-4], pos = 1
 <strong>输出：</strong>true
 <strong>解释：</strong>链表中有一个环，其尾部连接到第二个节点。
 </pre>
@@ -25,7 +25,7 @@
 
 <p><img alt="" src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png" style="height: 74px; width: 141px;"></p>
 
-<pre><strong>输入：</strong>head = [1,2], pos = 0
+<pre><strong>输入：</strong>maxSubBSTHead = [1,2], pos = 0
 <strong>输出：</strong>true
 <strong>解释：</strong>链表中有一个环，其尾部连接到第一个节点。
 </pre>
@@ -34,7 +34,7 @@
 
 <p><img alt="" src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png" style="height: 45px; width: 45px;"></p>
 
-<pre><strong>输入：</strong>head = [1], pos = -1
+<pre><strong>输入：</strong>maxSubBSTHead = [1], pos = -1
 <strong>输出：</strong>false
 <strong>解释：</strong>链表中没有环。
 </pre>

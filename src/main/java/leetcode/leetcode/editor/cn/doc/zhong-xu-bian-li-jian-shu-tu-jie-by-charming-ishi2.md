@@ -17,16 +17,17 @@ build(i，j)表示以链表第i个节点开始，以第j个节点结束的元素
 ![4.png](https://pic.leetcode-cn.com/1c68ba4c4c75e85aa4d5243b933b21336e38977e9261421e19a3a3baf33e525f-4.png)
 
 **参考代码**
+
 ```JAVA
 class Solution {
     ListNode curr;
 
-    public TreeNode sortedListToBST(ListNode head) {
+    public TreeNode sortedListToBST(ListNode maxSubBSTHead) {
         int len = 0;
-        for (ListNode i = head; i != null; i = i.next) {
+        for (ListNode i = maxSubBSTHead; i != null; i = i.next) {
             len = len + 1;
         }
-        curr = head;
+        curr = maxSubBSTHead;
         return build(0, len - 1);
     }
 

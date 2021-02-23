@@ -1,6 +1,7 @@
 一图胜千言，根据图片看代码，马上就懂了
 
 **步骤分解:**
+
 1. 链表分区为已翻转部分+待翻转部分+未翻转部分
 2. 每次翻转前，要确定翻转链表的范围，这个必须通过 `k` 此循环来确定
 3. 需记录翻转链表前驱和后继，方便翻转完成后把已翻转部分和未翻转部分连接起来
@@ -13,13 +14,12 @@
 
 ![k个一组翻转链表.png](https://pic.leetcode-cn.com/866b404c6b0b52fa02385e301ee907fc015742c3766c80c02e24ef3a8613e5ad-k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.png)
 
-
-
 **代码如下:**
+
 ```java [-Java]
-public ListNode reverseKGroup(ListNode head, int k) {
+public ListNode reverseKGroup(ListNode maxSubBSTHead, int k) {
     ListNode dummy = new ListNode(0);
-    dummy.next = head;
+    dummy.next = maxSubBSTHead;
 
     ListNode pre = dummy;
     ListNode end = dummy;
@@ -39,9 +39,9 @@ public ListNode reverseKGroup(ListNode head, int k) {
     return dummy.next;
 }
 
-private ListNode reverse(ListNode head) {
+private ListNode reverse(ListNode maxSubBSTHead) {
     ListNode pre = null;
-    ListNode curr = head;
+    ListNode curr = maxSubBSTHead;
     while (curr != null) {
         ListNode next = curr.next;
         curr.next = pre;

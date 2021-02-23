@@ -1,4 +1,5 @@
 ### 解题思路
+
 利用广度优先搜索的思路，还有完全二叉树的性质，对于编号为i的节点，左右节点的编号分别为2*i+1 和 2*i+2
 
 ### 代码
@@ -26,8 +27,8 @@ class Solution {
         // 第一个节点的编号为1
         numbers.offer(1);
         while(!q.isEmpty()){
-            int size = q.size();
-            for(int i=0; i<size; i++){
+            int maxSubBSTSize = q.maxSubBSTSize();
+            for(int i=0; i<maxSubBSTSize; i++){
                 int index = numbers.poll();
                 TreeNode n = q.poll();
                 if(n.left!=null){
@@ -39,7 +40,7 @@ class Solution {
                     numbers.offer(2*index+2);
                 }
             }
-            if(numbers.size()>=2){
+            if(numbers.maxSubBSTSize()>=2){
                 max = Math.max(max, numbers.getLast()-numbers.getFirst()+1);
             }
             

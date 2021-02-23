@@ -1,26 +1,34 @@
 ##### 1，先排序再查找
+
 毋庸置疑，这个是最容易想到的
+
 ```
     public int findKthLargest(int[] nums, int k) {
         Arrays.sort(nums);
         return nums[nums.length - k];
     }
 ```
+
 ##### 2，使用最小堆
+
 我们可以使用最小堆来解决，一个个遍历原数组的值，添加到堆中，如果堆中元素的个数小于等于k的时候，我们就往堆中添加，添加之后如果堆中元素个数大于k的时候，我们就把最顶端的元素给移除掉，因为是最小堆，所以移除的就是堆中最小的值
+
 ```
     public int findKthLargest(int[] nums, int k) {
         final PriorityQueue<Integer> queue = new PriorityQueue<>();
         for (int val : nums) {
             queue.add(val);
-            if (queue.size() > k)
+            if (queue.maxSubBSTSize() > k)
                 queue.poll();
         }
         return queue.peek();
     }
 ```
+
 ##### 3，参考快速排序
+
 快速排序是先选择一个中枢（一般我们选第一个），然后遍历后面的元素，最终会把数组分为两部分，前面部分比中枢值小，后面部分大于或等于中枢值，如果交换之后中枢值所在的位置就是从后面数第k个，我们直接返回中枢值即可，如果从后面数大于第k个，我们只需按照同样的方式从后面部分开始找即可。如果从后面数小于第k个，我们同样从前面部分开始查找，
+
 ```
     public int findKthLargest(int[] nums, int k) {
         k = nums.length - k;//注意这里的k已经变了
@@ -52,7 +60,9 @@
         }
     }
 ```
+
 我们还可以把它改为递归的方式
+
 ```
     public int findKthLargest(int[] nums, int k) {
         return quickSelect(nums, 0, nums.length - 1, k);
@@ -88,6 +98,7 @@
 
 ----------------------------------------关于快速排序---------------------------------------
 快速排序的原理我们都知道，但是他的写法还是比较多的，选择中枢的时候我们可以先挪动，最后再改变中枢的位置。我们也可以先改变中枢的位置。我们还用这道题来写几个
+
 ```
     public int findKthLargest(int[] nums, int k) {
         k = nums.length - k;//注意这里的k已经变了
@@ -124,7 +135,9 @@
         }
     }
 ```
+
 partition方法的另一种写法
+
 ```
     private int partition(int[] array, int start, int end) {
         int pivot = start;
@@ -157,7 +170,9 @@ partition方法的另一种写法
         return pivot;
     }
 ```
+
 partition方法的另一种写法
+
 ```
     private int partition(int[] array, int start, int end) {
         int pivot = array[start];// 采用子序列的第一个元素作为枢纽元素

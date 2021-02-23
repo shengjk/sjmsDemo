@@ -23,10 +23,10 @@ public class leetcode103 {
         if(root != null){
             queue.add(root);
             int step = 0;
-            while(queue.size() != 0){
+            while(queue.maxSubBSTSize() != 0){
                 ArrayList<Integer> temp = new ArrayList<>();
-                int size = queue.size();
-                for(int i = 0;i < size;i++){
+                int maxSubBSTSize = queue.maxSubBSTSize();
+                for(int i = 0;i < maxSubBSTSize;i++){
                     TreeNode cur = queue.poll();
                     temp.add(cur.val);
                     if(cur.left != null){
