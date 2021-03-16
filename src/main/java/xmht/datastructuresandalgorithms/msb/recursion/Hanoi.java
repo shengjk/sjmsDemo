@@ -22,10 +22,11 @@ public class Hanoi {
 	public static void func(int n, String from, String to, String other) {
 		if (n == 1) {
 			System.out.println("move 1 from:" + from + " to:" + to + " other:" + other);
+		} else {
+			func(n - 1, from, other, to);
+			System.out.println(" move " + n + " from:" + from + " to:" + to + " other:" + other);
+			func(n - 1, other, to, from);
 		}
-		func(n - 1, from, other, to);
-		System.out.println(" move " + n + " from:" + from + " to:" + to + " other:" + other);
-		func(n - 1, other, to, from);
 	}
 
 }
