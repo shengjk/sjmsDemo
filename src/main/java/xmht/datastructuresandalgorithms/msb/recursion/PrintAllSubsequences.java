@@ -5,6 +5,8 @@ import java.util.List;
 /**
  * @author shengjk1
  * @date 2021/3/6
+ * <p>
+ * 字符串所有的子序列，可以不连续但相对顺序不能变
  */
 public class PrintAllSubsequences {
 	public static void main(String[] args) {

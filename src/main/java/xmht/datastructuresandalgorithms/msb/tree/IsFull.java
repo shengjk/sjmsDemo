@@ -5,50 +5,43 @@ package xmht.datastructuresandalgorithms.msb.tree;
  * @date 2021/2/20
  */
 public class IsFull {
-	static class Node {
-		int  value;
-		Node left;
-		Node right;
+	public static class Node {
+		public int  value;
+		public Node left;
+		public Node right;
 
-		public Node(int value) {
-			this.value = value;
+		public Node(int data) {
+			this.value = data;
 		}
-	}
-
-	static class Infos {
-		boolean isFull;
-		int     height;
-		int     size;
-
-		public Infos(boolean isFull, int height, int size) {
-			this.isFull = isFull;
-			this.height = height;
-			this.size = size;
-		}
-	}
-
-	public static Infos process(Node x) {
-		if (x == null) {
-			return new Infos(true, 0, 0);
-		}
-
-		Infos leftInfos = process(x.left);
-		Infos rightInfos = process(x.right);
-
-		int height = Math.max(leftInfos.height, rightInfos.height) + 1;
-		int size = leftInfos.size + rightInfos.size + 1;
-
-		boolean isFull = (leftInfos.isFull && rightInfos.isFull && (1 << height) == size + 1);
-
-		return new Infos(isFull, height, size);
 	}
 
 	public static boolean isFull2(Node head) {
 		if (head == null) {
 			return true;
 		}
-		Infos all = process(head);
-		return all.isFull;
+		Info all = process(head);
+		return (1 << all.height) - 1 == all.nodes;
+	}
+
+	public static class Info {
+		public int height;
+		public int nodes;
+
+		public Info(int h, int n) {
+			height = h;
+			nodes = n;
+		}
+	}
+
+	public static Info process(Node head) {
+		if (head == null) {
+			return new Info(0, 0);
+		}
+		Info leftInfo = process(head.left);
+		Info rightInfo = process(head.right);
+		int height = Math.max(leftInfo.height, rightInfo.height) + 1;
+		int nodes = leftInfo.nodes + rightInfo.nodes + 1;
+		return new Info(height, nodes);
 	}
 
 

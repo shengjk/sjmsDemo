@@ -35,6 +35,7 @@ public class IsBalance {
 		Infos rightInfos = process2(x.right);
 
 		boolean isBalance = (leftInfos.isBalaced && rightInfos.isBalaced && Math.abs(leftInfos.height - rightInfos.height) < 2);
+		//当前树的高度，是左树和右树中的高者+1
 		int height = Math.max(leftInfos.height, rightInfos.height) + 1;
 
 		return new Infos(isBalance, height);

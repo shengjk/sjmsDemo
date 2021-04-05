@@ -5,8 +5,15 @@ import java.util.ArrayList;
 /**
  * @author shengjk1
  * @date 2021/3/6
+ * <p>
+ * 所有的子串，必须连续
  */
 public class PrintAllPremutations {
+	public static void main(String[] args) {
+		String str = "ABCD";
+		ArrayList<String> ans = new ArrayList<>();
+		process(str.toCharArray(), 0, ans);
+	}
 
 	/*
 	str[0...i-1] 已经做好决定了

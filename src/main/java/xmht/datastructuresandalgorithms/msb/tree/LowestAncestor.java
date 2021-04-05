@@ -1,6 +1,8 @@
 package xmht.datastructuresandalgorithms.msb.tree;
 
 /**
+ * 最近的公共祖先
+ *
  * @author shengjk1
  * @date 2021/2/20
  */
