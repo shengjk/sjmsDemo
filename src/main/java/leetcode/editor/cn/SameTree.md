@@ -5,21 +5,21 @@
 <p> </p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg" style="width: 622px; height: 182px;" />
+<img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg" style="width: 622px; hight: 182px;" />
 <pre>
 <strong>输入：</strong>p = [1,2,3], q = [1,2,3]
 <strong>输出：</strong>true
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg" style="width: 382px; height: 182px;" />
+<img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg" style="width: 382px; hight: 182px;" />
 <pre>
 <strong>输入：</strong>p = [1,2], q = [1,null,2]
 <strong>输出：</strong>false
 </pre>
 
 <p><strong>示例 3：</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg" style="width: 622px; height: 182px;" />
+<img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg" style="width: 622px; hight: 182px;" />
 <pre>
 <strong>输入：</strong>p = [1,2,1], q = [1,1,2]
 <strong>输出：</strong>false

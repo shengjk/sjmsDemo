@@ -1,16 +1,19 @@
-### 📺 视频题解  
+### 📺 视频题解
+
 ![104. 二叉树的最大深度.mp4](a49668bd-2702-4c98-8f93-9826cb3fa207)
 
 ### 📖 文字题解
+
 #### 方法一：深度优先搜索
 
 **思路与算法**
 
 如果我们知道了左子树和右子树的最大深度 *l* 和 *r*，那么该二叉树的最大深度即为
-![\max(l,r)+1 ](./p___max_l,r__+_1__.png) 
-而左子树和右子树的最大深度又可以以同样的方式进行计算。因此我们可以用「深度优先搜索」的方法来计算二叉树的最大深度。具体而言，在计算当前二叉树的最大深度时，可以先递归计算出其左子树和右子树的最大深度，然后在 *O(1)* 时间内计算出当前二叉树的最大深度。递归在访问到空节点时退出。
+![\max(l,r)+1 ](./p___max_l,r__+_1__.png)
+而左子树和右子树的最大深度又可以以同样的方式进行计算。因此我们可以用「深度优先搜索」的方法来计算二叉树的最大深度。具体而言，在计算当前二叉树的最大深度时，可以先递归计算出其左子树和右子树的最大深度，然后在 *
+O(1)* 时间内计算出当前二叉树的最大深度。递归在访问到空节点时退出。
 
- ![fig1](https://assets.leetcode-cn.com/solution-static/104/1.png) ![fig2](https://assets.leetcode-cn.com/solution-static/104/2.png) ![fig3](https://assets.leetcode-cn.com/solution-static/104/3.png) ![fig4](https://assets.leetcode-cn.com/solution-static/104/4.png) ![fig5](https://assets.leetcode-cn.com/solution-static/104/5.png) ![fig6](https://assets.leetcode-cn.com/solution-static/104/6.png) ![fig7](https://assets.leetcode-cn.com/solution-static/104/7.png) ![fig8](https://assets.leetcode-cn.com/solution-static/104/8.png) ![fig9](https://assets.leetcode-cn.com/solution-static/104/9.png) ![fig10](https://assets.leetcode-cn.com/solution-static/104/10.png) 
+![fig1](https://assets.leetcode-cn.com/solution-static/104/1.png) ![fig2](https://assets.leetcode-cn.com/solution-static/104/2.png) ![fig3](https://assets.leetcode-cn.com/solution-static/104/3.png) ![fig4](https://assets.leetcode-cn.com/solution-static/104/4.png) ![fig5](https://assets.leetcode-cn.com/solution-static/104/5.png) ![fig6](https://assets.leetcode-cn.com/solution-static/104/6.png) ![fig7](https://assets.leetcode-cn.com/solution-static/104/7.png) ![fig8](https://assets.leetcode-cn.com/solution-static/104/8.png) ![fig9](https://assets.leetcode-cn.com/solution-static/104/9.png) ![fig10](https://assets.leetcode-cn.com/solution-static/104/10.png)
 
 ```C++ [sol1-C++]
 class Solution {
@@ -21,6 +24,7 @@ public:
     }
 };
 ```
+
 ```java [sol1-Java]
 class Solution {
     public int maxDepth(TreeNode root) {
@@ -34,6 +38,7 @@ class Solution {
     }
 }
 ```
+
 ```python [sol1-Python]
 class Solution:
     def maxDepth(self, root):
@@ -72,13 +77,15 @@ int maxDepth(struct TreeNode *root) {
 
 - 时间复杂度：*O(n)*，其中 *n* 为二叉树节点的个数。每个节点在递归中只被遍历一次。
 
-- 空间复杂度：![O(\textit{height}) ](./p__O_textit{height}__.png) ，其中 ![\textit{height} ](./p__textit{height}_.png)  表示二叉树的高度。递归函数需要栈空间，而栈空间取决于递归的深度，因此空间复杂度等价于二叉树的高度。 
+- 空间复杂度：![O(\textit{hight}) ](./p__O_textit{hight}__.png)
+  ，其中 ![\textit{hight} ](./p__textit{hight}_.png)  表示二叉树的高度。递归函数需要栈空间，而栈空间取决于递归的深度，因此空间复杂度等价于二叉树的高度。
 
 #### 方法二：广度优先搜索
 
 **思路与算法**
 
-我们也可以用「广度优先搜索」的方法来解决这道题目，但我们需要对其进行一些修改，此时我们广度优先搜索的队列里存放的是「当前层的所有节点」。每次拓展下一层的时候，不同于广度优先搜索的每次只从队列里拿出一个节点，我们需要将队列里的所有节点都拿出来进行拓展，这样能保证每次拓展完的时候队列里存放的是当前层的所有节点，即我们是一层一层地进行拓展，最后我们用一个变量 ![\textit{ans} ](./p__textit{ans}_.png)  来维护拓展的次数，该二叉树的最大深度即为 ![\textit{ans} ](./p__textit{ans}_.png) 。
+我们也可以用「广度优先搜索」的方法来解决这道题目，但我们需要对其进行一些修改，此时我们广度优先搜索的队列里存放的是「当前层的所有节点」。每次拓展下一层的时候，不同于广度优先搜索的每次只从队列里拿出一个节点，我们需要将队列里的所有节点都拿出来进行拓展，这样能保证每次拓展完的时候队列里存放的是当前层的所有节点，即我们是一层一层地进行拓展，最后我们用一个变量 ![\textit{ans} ](./p__textit{ans}_.png)
+来维护拓展的次数，该二叉树的最大深度即为 ![\textit{ans} ](./p__textit{ans}_.png) 。
 
 ```C++ [sol2-C++]
 class Solution {
@@ -102,6 +109,7 @@ public:
     }
 };
 ```
+
 ```java [sol2-Java]
 class Solution {
     public int maxDepth(TreeNode root) {

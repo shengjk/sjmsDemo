@@ -5,14 +5,14 @@
 <p> </p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/01/04/list1.jpg" style="width: 302px; height: 242px;" />
+<img alt="" src="https://assets.leetcode.com/uploads/2021/01/04/list1.jpg" style="width: 302px; hight: 242px;" />
 <pre>
 <strong>输入：</strong>head = [1,1,2]
 <strong>输出：</strong>[1,2]
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/01/04/list2.jpg" style="width: 542px; height: 222px;" />
+<img alt="" src="https://assets.leetcode.com/uploads/2021/01/04/list2.jpg" style="width: 542px; hight: 222px;" />
 <pre>
 <strong>输入：</strong>head = [1,1,2,3,3]
 <strong>输出：</strong>[1,2,3]
