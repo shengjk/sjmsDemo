@@ -45,6 +45,7 @@ public class ExcelSheetColumnTitle {
 		public String convertToTitle(int columnNumber) {
 			StringBuilder sb = new StringBuilder();
 			while (columnNumber > 0) {
+				//数字转化为字符
 				int pop = (columnNumber - 1) % 26;
 				sb.append((char) ('A' + pop));
 				columnNumber = (columnNumber - 1) / 26;

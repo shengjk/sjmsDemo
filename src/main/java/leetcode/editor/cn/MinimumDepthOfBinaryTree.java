@@ -59,10 +59,27 @@ public class MinimumDepthOfBinaryTree {
 			if (root == null) {
 				return 0;
 			}
-			int leftMinDepth = minDepth(root.left);
-			int rightMinDepth = minDepth(root.right);
-			//说明 root.left || root.right 至少有一个为 null，因为距离是到叶子节点，所以应该去两者之间的较大者
-			return (leftMinDepth == 0 || rightMinDepth == 0) ? Math.max(leftMinDepth, rightMinDepth) + 1 : Math.min(leftMinDepth, rightMinDepth) + 1;
+			// int leftMinDepth = minDepth(root.left);
+			// int rightMinDepth = minDepth(root.right);
+			// 说明 root.left || root.right 至少有一个为 null，因为距离是到叶子节点，所以应该去两者之间的较大者
+			// return (leftMinDepth == 0 || rightMinDepth == 0) ? Math.max(leftMinDepth, rightMinDepth) + 1 : Math.min(leftMinDepth, rightMinDepth) + 1;
+			//套路解
+			return process(root);
+		}
+
+		public int process(TreeNode root) {
+			if (root.left == null && root.right == null) {
+				return 1;
+			}
+
+			int ans = Integer.MAX_VALUE;
+			if (root.left != null) {
+				ans = Math.min(process(root.left) + 1, ans);
+			}
+			if (root.right != null) {
+				ans = Math.min(process(root.right) + 1, ans);
+			}
+			return ans;
 		}
 	}
 
